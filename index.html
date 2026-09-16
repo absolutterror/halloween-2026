@@ -27,7 +27,7 @@
             background: rgba(20, 20, 20, 0.95);
             border: 1px solid #5a2600;
             border-radius: 20px;
-            padding: 30px;
+            padding: 45px 30px;
             text-align: center;
             box-shadow: 0 0 50px rgba(255, 90, 0, 0.15);
         }
@@ -35,15 +35,54 @@
             width: 100%;
             border-radius: 15px;
             box-shadow: 0 0 25px rgba(255,114,0,0.6);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
-        .prices {
-            margin: 30px 0;
+        .emoji {
+            font-size: 70px;
+            margin-bottom: 10px;
         }
-        .prices h2 {
-            margin-bottom: 18px;
-            color: #fff;
+        h1 {
+            font-size: 48px;
+            color: #ff7200;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(255, 114, 0, 0.5);
         }
+        .subtitle {
+            color: #cccccc;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        .date {
+            display: inline-block;
+            background: #ff7200;
+            color: #111;
+            font-weight: bold;
+            padding: 10px 22px;
+            border-radius: 30px;
+            margin-bottom: 30px;
+        }
+        .info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .info-box {
+            background: #171717;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 20px 10px;
+        }
+        .info-box strong {
+            display: block;
+            color: #ff7200;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+        .info-box span { color: #ddd; }
+        .prices { margin: 30px 0; }
+        .prices h2 { margin-bottom: 18px; color: #fff; }
         .price {
             display: flex;
             justify-content: space-between;
@@ -94,8 +133,24 @@
 <body>
     <div class="container">
         <div class="card">
-            <!-- Fachada nova substitui o cartão antigo -->
             <img src="ChatGPT Imagem 16 de set. de 2026, 18_10_31.png" alt="Fachada Halloween 2026">
+
+            <div class="emoji">🎃</div>
+            <h1>HALLOWEEN 2026</h1>
+            <p class="subtitle">Uma noite para morrer de diversão.</p>
+
+            <div class="date">31 DE OUTUBRO DE 2026</div>
+
+            <div class="info">
+                <div class="info-box">
+                    <strong>🍔 COMIDA</strong>
+                    <span>À vontade</span>
+                </div>
+                <div class="info-box">
+                    <strong>🥤 BEBIDA</strong>
+                    <span>À vontade</span>
+                </div>
+            </div>
 
             <div class="prices">
                 <h2>VALORES DA ENTRADA</h2>
@@ -124,5 +179,6 @@
     </div>
 </body>
 </html>
+
 
 
