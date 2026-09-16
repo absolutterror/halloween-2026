@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Halloween 2026</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #090909;
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+            background:
+                radial-gradient(circle at top, #3b1600 0%, #160900 35%, #090909 70%);
+        }
+
+        .card {
+            width: 100%;
+            max-width: 650px;
+            background: rgba(20, 20, 20, 0.95);
+            border: 1px solid #5a2600;
+            border-radius: 20px;
+            padding: 45px 30px;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(255, 90, 0, 0.15);
+        }
+
+        .emoji {
+            font-size: 70px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #ff7200;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(255, 114, 0, 0.5);
+        }
+
+        .subtitle {
+            color: #cccccc;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .date {
+            display: inline-block;
+            background: #ff7200;
+            color: #111;
+            font-weight: bold;
+            padding: 10px 22px;
+            border-radius: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .info-box {
+            background: #171717;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 20px 10px;
+        }
+
+        .info-box strong {
+            display: block;
+            color: #ff7200;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .info-box span {
+            color: #ddd;
+        }
+
+        .prices {
+            margin: 30px 0;
+        }
+
+        .prices h2 {
+            margin-bottom: 18px;
+            color: #fff;
+        }
+
+        .price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #151515;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 10px;
+        }
+
+        .price-name {
+            font-size: 18px;
+        }
+
+        .price-value {
+            color: #ff7200;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .button {
+            display: inline-block;
+            width: 100%;
+            border: none;
+            border-radius: 12px;
+            background: #ff7200;
+            color: #111;
+            padding: 17px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .button:hover {
+            background: #ff8c2a;
+            transform: translateY(-2px);
+        }
+
+        .notice {
+            margin-top: 25px;
+            color: #999;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .footer {
+            margin-top: 30px;
+            color: #555;
+            font-size: 12px;
+        }
+
+        @media (max-width: 500px) {
+            h1 {
+                font-size: 36px;
+            }
+
+            .info {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 35px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="card">
+
+            <div class="emoji">🎃</div>
+
+            <h1>HALLOWEEN 2026</h1>
+
+            <p class="subtitle">
+                Uma noite para morrer de diversão.
+            </p>
+
+            <div class="date">
+                31 DE OUTUBRO DE 2026
+            </div>
+
+            <div class="info">
+
+                <div class="info-box">
+                    <strong>🍔 COMIDA</strong>
+                    <span>À vontade</span>
+                </div>
+
+                <div class="info-box">
+                    <strong>🥤 BEBIDA</strong>
+                    <span>À vontade</span>
+                </div>
+
+            </div>
+
+            <div class="prices">
+
+                <h2>VALORES DA ENTRADA</h2>
+
+                <div class="price">
+                    <span class="price-name">Homens</span>
+                    <span class="price-value">R$ 30</span>
+                </div>
+
+                <div class="price">
+                    <span class="price-name">Mulheres</span>
+                    <span class="price-value">R$ 20</span>
+                </div>
+
+            </div>
+
+            <a href="#" class="button">
+                CONFIRMAR PRESENÇA
+            </a>
+
+            <p class="notice">
+                O ingresso será nominal e individual.
+                Após a confirmação do pagamento, será enviado
+                um ingresso único com QR Code para entrada.
+            </p>
+
+            <div class="footer">
+                Halloween 2026 • Evento particular
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
