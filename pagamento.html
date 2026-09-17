@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pagamento — Halloween 2026</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(circle at top, #321000 0%, #0b0b0b 45%, #000 100%);
+
+            color: white;
+
+            font-family: Arial, Helvetica, sans-serif;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 25px;
+
+        }
+
+        .payment-box {
+
+            width: 100%;
+
+            max-width: 430px;
+
+            background: #111;
+
+            border: 1px solid #333;
+
+            border-radius: 18px;
+
+            padding: 30px 25px;
+
+            text-align: center;
+
+            box-shadow:
+                0 0 30px rgba(255, 69, 0, 0.18);
+
+        }
+
+        .icon {
+
+            font-size: 55px;
+
+            margin-bottom: 10px;
+
+        }
+
+        h1 {
+
+            color: #ff5a00;
+
+            font-size: 28px;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 8px;
+
+        }
+
+        .subtitle {
+
+            color: #aaa;
+
+            font-size: 14px;
+
+            margin-bottom: 25px;
+
+        }
+
+        .ticket-info {
+
+            background: #181818;
+
+            border-left: 4px solid #ff5a00;
+
+            border-radius: 10px;
+
+            padding: 18px;
+
+            text-align: left;
+
+            margin-bottom: 25px;
+
+        }
+
+        .ticket-info p {
+
+            margin-bottom: 12px;
+
+            color: #ddd;
+
+        }
+
+        .ticket-info p:last-child {
+
+            margin-bottom: 0;
+
+        }
+
+        .label {
+
+            color: #ff5a00;
+
+            font-weight: bold;
+
+        }
+
+        .price {
+
+            font-size: 30px;
+
+            font-weight: bold;
+
+            color: #fff;
+
+        }
+
+        .pix-title {
+
+            color: #ddd;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            margin-bottom: 10px;
+
+        }
+
+        .pix-box {
+
+            background: #080808;
+
+            border: 1px solid #333;
+
+            border-radius: 10px;
+
+            padding: 16px;
+
+            margin-bottom: 15px;
+
+            word-break: break-all;
+
+        }
+
+        .pix-key {
+
+            color: #ff5a00;
+
+            font-size: 20px;
+
+            font-weight: bold;
+
+        }
+
+        .copy-button {
+
+            width: 100%;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #ff5a00;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-bottom: 20px;
+
+        }
+
+        .copy-button:hover {
+
+            background: #ff6f26;
+
+        }
+
+        .message {
+
+            color: #aaa;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+
+        }
+
+        .back {
+
+            display: inline-block;
+
+            margin-top: 22px;
+
+            color: #888;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+        }
+
+        .back:hover {
+
+            color: #ff5a00;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="payment-box">
+
+
+        <div class="icon">
+            💀
+        </div>
+
+
+        <h1>
+            PAGAMENTO
+        </h1>
+
+
+        <div class="subtitle">
+            HALLOWEEN 2026
+        </div>
+
+
+        <div class="ticket-info">
+
+
+            <p>
+
+                <span class="label">
+                    Ingresso:
+                </span>
+
+                <span id="tipoIngresso">
+                    Carregando...
+                </span>
+
+            </p>
+
+
+            <p>
+
+                <span class="label">
+                    Valor:
+                </span>
+
+                <span class="price" id="valorIngresso">
+                    --
+                </span>
+
+            </p>
+
+
+        </div>
+
+
+        <div class="pix-title">
+            PIX para pagamento
+        </div>
+
+
+        <div class="pix-box">
+
+            <div class="pix-key" id="pix">
+                11988884547
+            </div>
+
+        </div>
+
+
+        <button
+            class="copy-button"
+            onclick="copiarPix()">
+
+            📋 COPIAR PIX
+
+        </button>
+
+
+        <div class="message">
+
+            Faça o pagamento utilizando a chave PIX acima.
+
+            <br><br>
+
+            Após realizar o pagamento,
+            aguarde a confirmação.
+
+            <br>
+
+            Seu ingresso com QR Code será liberado
+            após a confirmação do pagamento.
+
+        </div>
+
+
+        <a
+            href="index.html"
+            class="back">
+
+            ← Voltar para o início
+
+        </a>
+
+
+    </div>
+
+
+    <script>
+
+
+        const parametros =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        const tipo =
+            parametros.get("tipo");
+
+
+        const tipoIngresso =
+            document.getElementById(
+                "tipoIngresso"
+            );
+
+
+        const valorIngresso =
+            document.getElementById(
+                "valorIngresso"
+            );
+
+
+        if (tipo === "masculino") {
+
+            tipoIngresso.textContent =
+                "👨 Masculino";
+
+            valorIngresso.textContent =
+                "R$ 30";
+
+        }
+
+        else if (tipo === "feminino") {
+
+            tipoIngresso.textContent =
+                "👩 Feminino";
+
+            valorIngresso.textContent =
+                "R$ 20";
+
+        }
+
+        else {
+
+            tipoIngresso.textContent =
+                "Ingresso não selecionado";
+
+            valorIngresso.textContent =
+                "--";
+
+        }
+
+
+        function copiarPix() {
+
+            const pix =
+                document.getElementById(
+                    "pix"
+                ).textContent;
+
+
+            navigator.clipboard.writeText(pix);
+
+
+            const botao =
+                document.querySelector(
+                    ".copy-button"
+                );
+
+
+            botao.textContent =
+                "✓ PIX COPIADO!";
+
+
+            setTimeout(
+                function() {
+
+                    botao.textContent =
+                        "📋 COPIAR PIX";
+
+                },
+                2000
+            );
+
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>
