@@ -266,18 +266,18 @@
 
         <div class="message">
 
-            Clique no botão acima para copiar a chave PIX
+            Clique no botão acima para copiar o Pix
             e realizar o pagamento.
+
+            <br><br>
+
+            O valor do ingresso já estará preenchido
+            no aplicativo do seu banco.
 
             <br><br>
 
             Após realizar o pagamento,
             aguarde a confirmação.
-
-            <br>
-
-            Seu ingresso com QR Code será liberado
-            após a confirmação do pagamento.
 
         </div>
 
@@ -319,6 +319,9 @@
             );
 
 
+        let valor = 0;
+
+
         if (tipo === "masculino") {
 
             tipoIngresso.textContent =
@@ -327,7 +330,10 @@
             valorIngresso.textContent =
                 "R$ 30";
 
+            valor = 30;
+
         }
+
 
         else if (tipo === "feminino") {
 
@@ -337,7 +343,10 @@
             valorIngresso.textContent =
                 "R$ 20";
 
+            valor = 20;
+
         }
+
 
         else {
 
@@ -350,12 +359,145 @@
         }
 
 
+        function gerarPix(valor) {
+
+
+            const chavePix =
+                "11988884547";
+
+
+            const nome =
+                "HENRIQUE SILVA REBOUCAS";
+
+
+            const cidade =
+                "COTIA";
+
+
+            const valorFormatado =
+                valor.toFixed(2);
+
+
+            function campo(id, valor) {
+
+                return (
+                    id +
+                    String(valor.length).padStart(2, "0") +
+                    valor
+                );
+
+            }
+
+
+            const payloadSemCRC =
+
+                campo("00", "01") +
+
+                campo("26",
+                    campo("00", "BR.GOV.BCB.PIX") +
+                    campo("01", chavePix)
+                ) +
+
+                campo("52", "0000") +
+
+                campo("53", "986") +
+
+                campo("54", valorFormatado) +
+
+                campo("58", "BR") +
+
+                campo("59", nome.substring(0, 25)) +
+
+                campo("60", cidade.substring(0, 15)) +
+
+                campo("62",
+                    campo("05", "***")
+                ) +
+
+                "6304";
+
+
+            function crc16(str) {
+
+                let crc = 0xFFFF;
+
+
+                for (
+                    let i = 0;
+                    i < str.length;
+                    i++
+                ) {
+
+                    crc ^= str.charCodeAt(i) << 8;
+
+
+                    for (
+                        let j = 0;
+                        j < 8;
+                        j++
+                    ) {
+
+                        if (
+                            crc & 0x8000
+                        ) {
+
+                            crc =
+                                (crc << 1) ^
+                                0x1021;
+
+                        }
+
+                        else {
+
+                            crc =
+                                crc << 1;
+
+                        }
+
+                        crc &= 0xFFFF;
+
+                    }
+
+                }
+
+
+                return crc
+                    .toString(16)
+                    .toUpperCase()
+                    .padStart(4, "0");
+
+            }
+
+
+            return (
+                payloadSemCRC +
+                crc16(payloadSemCRC)
+            );
+
+        }
+
+
         function copiarPix() {
 
-            const pix = "11988884547";
+
+            if (!valor) {
+
+                alert(
+                    "Ingresso não selecionado."
+                );
+
+                return;
+
+            }
 
 
-            navigator.clipboard.writeText(pix);
+            const codigoPix =
+                gerarPix(valor);
+
+
+            navigator.clipboard.writeText(
+                codigoPix
+            );
 
 
             const botao =
@@ -375,7 +517,7 @@
                         "📋 COPIAR PIX";
 
                 },
-                2000
+                2500
             );
 
         }
