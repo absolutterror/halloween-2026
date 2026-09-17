@@ -462,18 +462,102 @@
                 );
 
 
-                alert(
-                    "Cadastro enviado com sucesso!"
-                );
+              const nomeCadastrado =
+    document.getElementById("nome").value;
 
 
-                formulario.reset();
+const ingressoCadastrado =
+    tipo === "masculino"
+        ? "👨 Masculino"
+        : "👩 Feminino";
 
 
-                botao.disabled = false;
+const valorCadastrado =
+    tipo === "masculino"
+        ? "R$ 30"
+        : "R$ 20";
 
-                botao.textContent =
-                    "CONTINUAR";
+
+document.querySelector(".form-box").innerHTML = `
+
+    <div style="
+        text-align: center;
+        padding: 20px 5px;
+    ">
+
+        <div style="
+            font-size: 60px;
+            margin-bottom: 15px;
+        ">
+            🎃
+        </div>
+
+        <h2 style="
+            color: #ff5a00;
+            font-size: 28px;
+            margin-bottom: 20px;
+        ">
+            CADASTRO REALIZADO!
+        </h2>
+
+        <p style="
+            color: #ddd;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        ">
+            Seu cadastro foi recebido com sucesso.
+        </p>
+
+
+        <div style="
+            background: #101010;
+            border: 1px solid #333;
+            border-left: 4px solid #ff4500;
+            border-radius: 10px;
+            padding: 18px;
+            text-align: left;
+            margin-bottom: 25px;
+        ">
+
+            <p style="margin-bottom: 10px;">
+                <strong style="color: #ff5a00;">
+                    Nome:
+                </strong>
+                ${nomeCadastrado}
+            </p>
+
+            <p style="margin-bottom: 10px;">
+                <strong style="color: #ff5a00;">
+                    Ingresso:
+                </strong>
+                ${ingressoCadastrado}
+            </p>
+
+            <p>
+                <strong style="color: #ff5a00;">
+                    Valor:
+                </strong>
+                ${valorCadastrado}
+            </p>
+
+        </div>
+
+
+        <p style="
+            color: #aaa;
+            font-size: 14px;
+            line-height: 1.7;
+        ">
+            Aguarde a confirmação do pagamento.
+            <br>
+            Após a confirmação, seu ingresso
+            <br>
+            com QR Code será enviado.
+        </p>
+
+    </div>
+
+`;
 
 
             } catch (erro) {
