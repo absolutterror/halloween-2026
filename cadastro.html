@@ -4,9 +4,10 @@
 <head>
 
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Cadastro - Halloween 2026</title>
+    <title>Cadastro — Halloween 2026</title>
 
     <style>
 
@@ -17,216 +18,200 @@
         }
 
         body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #020202;
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(circle at top, #321000 0%, #0b0b0b 45%, #000 100%);
+
             color: white;
-            min-height: 100vh;
-        }
 
-        .page {
-            min-height: 100vh;
-            padding: 30px 15px 50px;
+            font-family: Arial, Helvetica, sans-serif;
 
-            background:
-                radial-gradient(
-                    circle at 50% 0%,
-                    rgba(255, 50, 0, 0.35),
-                    transparent 35%
-                ),
-                #020202;
-        }
+            display: flex;
 
-        .container {
-            max-width: 600px;
-            margin: auto;
-        }
+            justify-content: center;
 
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .skull {
-            font-size: 55px;
-            margin-bottom: 10px;
-
-            filter:
-                drop-shadow(0 0 8px #ff4500)
-                drop-shadow(0 0 20px #ff1e00);
-        }
-
-        h1 {
-            font-size: 38px;
-            color: #ff4d00;
-            letter-spacing: 2px;
-
-            text-shadow:
-                0 0 10px #ff4500,
-                0 0 25px rgba(255, 50, 0, 0.6);
-
-            margin-bottom: 10px;
-        }
-
-        .subtitle {
-            color: #bbb;
-            font-size: 15px;
-        }
-
-        .form-box {
-            background:
-                linear-gradient(
-                    145deg,
-                    #181818,
-                    #080808
-                );
-
-            border: 1px solid #3a3a3a;
-            border-left: 5px solid #ff4500;
-
-            border-radius: 14px;
+            align-items: center;
 
             padding: 25px;
 
-            box-shadow:
-                0 0 25px rgba(0, 0, 0, 0.6);
         }
 
-        .ticket-type {
-            text-align: center;
+        .form-box {
 
-            margin-bottom: 25px;
+            width: 100%;
 
-            padding: 15px;
+            max-width: 430px;
 
-            background: #101010;
+            background: #111;
 
             border: 1px solid #333;
 
-            border-radius: 10px;
+            border-radius: 18px;
+
+            padding: 30px 25px;
+
+            box-shadow:
+                0 0 30px rgba(255, 69, 0, 0.18);
+
         }
 
-        .ticket-type strong {
-            display: block;
+        .icon {
+
+            text-align: center;
+
+            font-size: 55px;
+
+            margin-bottom: 10px;
+
+        }
+
+        h1 {
+
+            text-align: center;
 
             color: #ff5a00;
 
-            font-size: 13px;
+            font-size: 28px;
 
-            letter-spacing: 2px;
-
-            margin-bottom: 7px;
-        }
-
-        .ticket-type span {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .field {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
+            letter-spacing: 1px;
 
             margin-bottom: 8px;
 
-            color: #ddd;
+        }
+
+        .subtitle {
+
+            text-align: center;
+
+            color: #aaa;
+
+            font-size: 14px;
+
+            margin-bottom: 25px;
+
+        }
+
+        .ticket-type {
+
+            background: #181818;
+
+            border-left: 4px solid #ff5a00;
+
+            border-radius: 10px;
+
+            padding: 16px;
+
+            margin-bottom: 25px;
+
+            text-align: center;
+
+            color: #ff5a00;
 
             font-weight: bold;
+
+            font-size: 17px;
+
+        }
+
+        label {
+
+            display: block;
+
+            color: #ddd;
+
+            font-size: 14px;
+
+            margin-bottom: 7px;
+
         }
 
         input {
+
             width: 100%;
 
             padding: 14px;
 
-            background: #090909;
+            background: #080808;
 
-            border: 1px solid #444;
+            border: 1px solid #333;
 
-            border-radius: 8px;
+            border-radius: 9px;
 
             color: white;
 
-            font-size: 16px;
+            font-size: 15px;
 
             outline: none;
+
+            margin-bottom: 18px;
+
         }
 
         input:focus {
-            border-color: #ff4500;
 
-            box-shadow:
-                0 0 10px rgba(255, 70, 0, 0.25);
+            border-color: #ff5a00;
+
         }
 
         .submit-button {
+
             width: 100%;
 
             padding: 16px;
-
-            margin-top: 5px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #ff4d00,
-                    #c51f00
-                );
 
             border: none;
 
             border-radius: 10px;
 
+            background: #ff5a00;
+
             color: white;
 
-            font-size: 18px;
+            font-size: 16px;
 
             font-weight: bold;
 
             cursor: pointer;
 
-            box-shadow:
-                0 0 20px rgba(255, 60, 0, 0.35);
+            margin-top: 5px;
 
-            transition: 0.25s;
         }
 
         .submit-button:hover {
-            transform: translateY(-2px);
 
-            box-shadow:
-                0 0 30px rgba(255, 60, 0, 0.55);
+            background: #ff6f26;
+
+        }
+
+        .submit-button:disabled {
+
+            opacity: 0.6;
+
+            cursor: not-allowed;
+
         }
 
         .back {
+
             display: block;
 
             text-align: center;
 
-            margin-top: 20px;
+            margin-top: 22px;
 
             color: #888;
 
             text-decoration: none;
 
-            font-size: 14px;
+            font-size: 13px;
+
         }
 
         .back:hover {
+
             color: #ff5a00;
-        }
-
-        @media (max-width: 600px) {
-
-            .form-box {
-                padding: 20px;
-            }
-
-            h1 {
-                font-size: 30px;
-            }
 
         }
 
@@ -237,354 +222,264 @@
 
 <body>
 
-<div class="page">
 
-    <div class="container">
+    <div class="form-box">
 
 
-        <div class="header">
-
-            <div class="skull">
-                💀
-            </div>
-
-            <h1>
-                CADASTRO
-            </h1>
-
-            <p class="subtitle">
-                Halloween 2026
-            </p>
-
-        </div>
-
-
-        <div class="form-box">
-
-
-            <div class="ticket-type">
-
-                <strong>
-                    INGRESSO SELECIONADO
-                </strong>
-
-                <span id="ticketType">
-                    Carregando...
-                </span>
-
-            </div>
-
-
-            <form>
-
-
-                <div class="field">
-
-                    <label for="nome">
-                        Nome completo
-                    </label>
-
-                    <input
-                        type="text"
-                        id="nome"
-                        name="nome"
-                        placeholder="Digite seu nome completo"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="field">
-
-                    <label for="whatsapp">
-                        WhatsApp
-                    </label>
-
-                    <input
-                        type="tel"
-                        id="whatsapp"
-                        name="whatsapp"
-                        placeholder="(11) 99999-9999"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="field">
-
-                    <label for="email">
-                        E-mail
-                    </label>
-
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="seuemail@email.com"
-                        required
-                    >
-
-                </div>
-
-
-                <button
-                    type="submit"
-                    class="submit-button"
-                >
-                    CONTINUAR
-                </button>
-
-
-            </form>
-
-
-            <a
-                href="index.html"
-                class="back"
-            >
-                ← Voltar para o convite
-            </a>
-
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<script>
-
-    const URL_SCRIPT = "https://script.google.com/macros/s/AKfycby47FKISxM1brTG5wvQcEY5LBJcWfv6RO8p4ku7dBFJxfFNZp98bBbvptXaXk5Xfrzr/exec";
-
-
-    const params = new URLSearchParams(
-        window.location.search
-    );
-
-    const tipo = params.get("tipo");
-
-    const ticketType =
-        document.getElementById("ticketType");
-
-
-    let valor = "";
-
-
-    if (tipo === "masculino") {
-
-        ticketType.textContent =
-            "👨 Masculino — R$ 30";
-
-        valor = "30";
-
-    }
-
-    else if (tipo === "feminino") {
-
-        ticketType.textContent =
-            "👩 Feminino — R$ 20";
-
-        valor = "20";
-
-    }
-
-    else {
-
-        ticketType.textContent =
-            "Ingresso não selecionado";
-
-    }
-
-
-    const formulario =
-        document.querySelector("form");
-
-
-    formulario.addEventListener(
-        "submit",
-        async function(event) {
-
-            event.preventDefault();
-
-
-            const nome =
-                document.getElementById("nome").value;
-
-            const whatsapp =
-                document.getElementById("whatsapp").value;
-
-            const email =
-                document.getElementById("email").value;
-
-
-            const botao =
-                document.querySelector(".submit-button");
-
-
-            botao.disabled = true;
-
-            botao.textContent =
-                "ENVIANDO...";
-
-
-            try {
-
-                await fetch(
-                    URL_SCRIPT,
-                    {
-                        method: "POST",
-
-                        mode: "no-cors",
-
-                        headers: {
-                            "Content-Type":
-                                "text/plain;charset=utf-8"
-                        },
-
-                        body: JSON.stringify({
-
-                            nome: nome,
-
-                            whatsapp: whatsapp,
-
-                            email: email,
-
-                            tipo: tipo,
-
-                            valor: valor
-
-                        })
-
-                    }
-                );
-
-
-              const nomeCadastrado =
-    document.getElementById("nome").value;
-
-
-const ingressoCadastrado =
-    tipo === "masculino"
-        ? "👨 Masculino"
-        : "👩 Feminino";
-
-
-const valorCadastrado =
-    tipo === "masculino"
-        ? "R$ 30"
-        : "R$ 20";
-
-
-document.querySelector(".form-box").innerHTML = `
-
-    <div style="
-        text-align: center;
-        padding: 20px 5px;
-    ">
-
-        <div style="
-            font-size: 60px;
-            margin-bottom: 15px;
-        ">
+        <div class="icon">
             🎃
         </div>
 
-        <h2 style="
-            color: #ff5a00;
-            font-size: 28px;
-            margin-bottom: 20px;
-        ">
-            CADASTRO REALIZADO!
-        </h2>
 
-        <p style="
-            color: #ddd;
-            line-height: 1.7;
-            margin-bottom: 25px;
-        ">
-            Seu cadastro foi recebido com sucesso.
-        </p>
+        <h1>
+            CADASTRO
+        </h1>
 
 
-        <div style="
-            background: #101010;
-            border: 1px solid #333;
-            border-left: 4px solid #ff4500;
-            border-radius: 10px;
-            padding: 18px;
-            text-align: left;
-            margin-bottom: 25px;
-        ">
+        <div class="subtitle">
+            HALLOWEEN 2026
+        </div>
 
-            <p style="margin-bottom: 10px;">
-                <strong style="color: #ff5a00;">
-                    Nome:
-                </strong>
-                ${nomeCadastrado}
-            </p>
 
-            <p style="margin-bottom: 10px;">
-                <strong style="color: #ff5a00;">
-                    Ingresso:
-                </strong>
-                ${ingressoCadastrado}
-            </p>
+        <div
+            class="ticket-type"
+            id="ticketType">
 
-            <p>
-                <strong style="color: #ff5a00;">
-                    Valor:
-                </strong>
-                ${valorCadastrado}
-            </p>
+            Carregando...
 
         </div>
 
 
-        <p style="
-            color: #aaa;
-            font-size: 14px;
-            line-height: 1.7;
-        ">
-            Aguarde a confirmação do pagamento.
-            <br>
-            Após a confirmação, seu ingresso
-            <br>
-            com QR Code será enviado.
-        </p>
+        <form>
+
+
+            <label for="nome">
+                Nome completo
+            </label>
+
+            <input
+                type="text"
+                id="nome"
+                placeholder="Digite seu nome completo"
+                required>
+
+
+            <label for="whatsapp">
+                WhatsApp
+            </label>
+
+            <input
+                type="tel"
+                id="whatsapp"
+                placeholder="(11) 99999-9999"
+                required>
+
+
+            <label for="email">
+                E-mail
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Digite seu e-mail"
+                required>
+
+
+            <button
+                type="submit"
+                class="submit-button">
+
+                CONTINUAR
+
+            </button>
+
+
+        </form>
+
+
+        <a
+            href="index.html"
+            class="back">
+
+            ← Voltar para o início
+
+        </a>
+
 
     </div>
 
-`;
+
+    <script>
 
 
-            } catch (erro) {
-
-                alert(
-                    "Não foi possível enviar o cadastro. Tente novamente."
-                );
+        const URL_SCRIPT =
+            "https://script.google.com/macros/s/AKfycby47FKISxM1brTG5wvQcEY5LBjCWfv6RO8p4ku7dBFJxfFNZp98bBbvptXaXk5Xfrzr/exec";
 
 
-                botao.disabled = false;
+        const parametros =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        const tipo =
+            parametros.get("tipo");
+
+
+        const ticketType =
+            document.getElementById(
+                "ticketType"
+            );
+
+
+        let valor = "";
+
+
+        if (tipo === "masculino") {
+
+            ticketType.textContent =
+                "👨 Masculino — R$ 30";
+
+            valor = "30";
+
+        }
+
+        else if (tipo === "feminino") {
+
+            ticketType.textContent =
+                "👩 Feminino — R$ 20";
+
+            valor = "20";
+
+        }
+
+        else {
+
+            ticketType.textContent =
+                "Ingresso não selecionado";
+
+        }
+
+
+        const formulario =
+            document.querySelector("form");
+
+
+        formulario.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+
+                const nome =
+                    document.getElementById(
+                        "nome"
+                    ).value;
+
+
+                const whatsapp =
+                    document.getElementById(
+                        "whatsapp"
+                    ).value;
+
+
+                const email =
+                    document.getElementById(
+                        "email"
+                    ).value;
+
+
+                const botao =
+                    document.querySelector(
+                        ".submit-button"
+                    );
+
+
+                botao.disabled = true;
 
                 botao.textContent =
-                    "CONTINUAR";
+                    "ENVIANDO...";
+
+
+                try {
+
+
+                    await fetch(
+
+                        URL_SCRIPT,
+
+                        {
+
+                            method: "POST",
+
+                            mode: "no-cors",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "text/plain;charset=utf-8"
+
+                            },
+
+                            body:
+                                JSON.stringify({
+
+                                    nome: nome,
+
+                                    whatsapp: whatsapp,
+
+                                    email: email,
+
+                                    tipo: tipo,
+
+                                    valor: valor
+
+                                })
+
+                        }
+
+                    );
+
+
+                    /*
+                     * Cadastro enviado com sucesso.
+                     *
+                     * Agora manda a pessoa
+                     * diretamente para a página
+                     * de pagamento.
+                     */
+
+                    window.location.href =
+                        "pagamento.html?tipo="
+                        + encodeURIComponent(tipo);
+
+
+                }
+
+                catch (erro) {
+
+
+                    alert(
+                        "Não foi possível enviar o cadastro. Tente novamente."
+                    );
+
+
+                    botao.disabled = false;
+
+                    botao.textContent =
+                        "CONTINUAR";
+
+
+                }
 
             }
 
-        }
-    );
+        );
 
-</script>
 
-        ticketType.textContent =
-            "Ingresso não selecionado";
-
-    }
-
-</script>
+    </script>
 
 
 </body>
