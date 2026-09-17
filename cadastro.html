@@ -357,6 +357,9 @@
 
 <script>
 
+    const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbxnorf494VKxZJPZqY9xBgYaB1mRj3peRKJTT5EqtV5HwNi130gZftkEhXV32EF0VTc/exec";
+
+
     const params = new URLSearchParams(
         window.location.search
     );
@@ -367,10 +370,15 @@
         document.getElementById("ticketType");
 
 
+    let valor = "";
+
+
     if (tipo === "masculino") {
 
         ticketType.textContent =
             "👨 Masculino — R$ 30";
+
+        valor = "30";
 
     }
 
@@ -379,9 +387,113 @@
         ticketType.textContent =
             "👩 Feminino — R$ 20";
 
+        valor = "20";
+
     }
 
     else {
+
+        ticketType.textContent =
+            "Ingresso não selecionado";
+
+    }
+
+
+    const formulario =
+        document.querySelector("form");
+
+
+    formulario.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            const nome =
+                document.getElementById("nome").value;
+
+            const whatsapp =
+                document.getElementById("whatsapp").value;
+
+            const email =
+                document.getElementById("email").value;
+
+
+            const botao =
+                document.querySelector(".submit-button");
+
+
+            botao.disabled = true;
+
+            botao.textContent =
+                "ENVIANDO...";
+
+
+            try {
+
+                await fetch(
+                    URL_SCRIPT,
+                    {
+                        method: "POST",
+
+                        mode: "no-cors",
+
+                        headers: {
+                            "Content-Type":
+                                "text/plain;charset=utf-8"
+                        },
+
+                        body: JSON.stringify({
+
+                            nome: nome,
+
+                            whatsapp: whatsapp,
+
+                            email: email,
+
+                            tipo: tipo,
+
+                            valor: valor
+
+                        })
+
+                    }
+                );
+
+
+                alert(
+                    "Cadastro enviado com sucesso!"
+                );
+
+
+                formulario.reset();
+
+
+                botao.disabled = false;
+
+                botao.textContent =
+                    "CONTINUAR";
+
+
+            } catch (erro) {
+
+                alert(
+                    "Não foi possível enviar o cadastro. Tente novamente."
+                );
+
+
+                botao.disabled = false;
+
+                botao.textContent =
+                    "CONTINUAR";
+
+            }
+
+        }
+    );
+
+</script>
 
         ticketType.textContent =
             "Ingresso não selecionado";
