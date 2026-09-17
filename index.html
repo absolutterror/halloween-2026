@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <title>Halloween 2026</title>
 
     <style>
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -25,9 +27,24 @@
             padding: 25px 15px 50px;
 
             background:
-                radial-gradient(circle at 50% 0%, rgba(255, 50, 0, 0.35), transparent 32%),
-                radial-gradient(circle at 100% 50%, rgba(150, 0, 0, 0.18), transparent 30%),
-                radial-gradient(circle at 0% 80%, rgba(255, 70, 0, 0.12), transparent 25%),
+                radial-gradient(
+                    circle at 50% 0%,
+                    rgba(255, 50, 0, 0.35),
+                    transparent 32%
+                ),
+
+                radial-gradient(
+                    circle at 100% 50%,
+                    rgba(150, 0, 0, 0.18),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    circle at 0% 80%,
+                    rgba(255, 70, 0, 0.12),
+                    transparent 25%
+                ),
+
                 #020202;
         }
 
@@ -35,6 +52,7 @@
             max-width: 900px;
             margin: auto;
         }
+
 
         /* =========================
            CABEÇALHO
@@ -78,6 +96,7 @@
                 0 0 8px rgba(255, 255, 255, 0.15);
         }
 
+
         /* =========================
            DATA + ENDEREÇO
         ========================= */
@@ -86,17 +105,23 @@
             display: grid;
             grid-template-columns: 1fr 1.5fr;
             gap: 12px;
+
             margin-bottom: 30px;
         }
 
         .event-box {
             background:
-                linear-gradient(145deg, #181818, #090909);
+                linear-gradient(
+                    145deg,
+                    #181818,
+                    #090909
+                );
 
             border: 1px solid #4a4a4a;
             border-left: 5px solid #ff4500;
 
             border-radius: 12px;
+
             padding: 18px;
 
             box-shadow:
@@ -120,6 +145,7 @@
             display: block;
 
             color: #ff5a00;
+
             font-size: 13px;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -132,9 +158,11 @@
 
         .event-box span {
             color: #fff;
+
             font-size: 16px;
             font-weight: bold;
         }
+
 
         /* =========================
            COMIDA E BEBIDA
@@ -143,6 +171,7 @@
         .info {
             display: grid;
             grid-template-columns: 1fr 1fr;
+
             gap: 15px;
 
             margin-bottom: 35px;
@@ -150,17 +179,22 @@
 
         .info-box {
             background:
-                linear-gradient(145deg, #141414, #080808);
+                linear-gradient(
+                    145deg,
+                    #141414,
+                    #080808
+                );
 
             border: 1px solid #292929;
 
             border-radius: 14px;
+
             padding: 25px 15px;
 
             text-align: center;
 
             box-shadow:
-                0 8px 25px rgba(0,0,0,0.4);
+                0 8px 25px rgba(0, 0, 0, 0.4);
 
             transition: 0.25s;
         }
@@ -178,6 +212,7 @@
             display: block;
 
             color: #ff5a00;
+
             font-size: 21px;
 
             margin-bottom: 8px;
@@ -188,10 +223,10 @@
 
         .info-box span {
             color: #ddd;
+
             font-size: 16px;
         }
 
-       
 
         /* =========================
            ESCOLHA DO INGRESSO
@@ -218,35 +253,46 @@
 
         .ticket-buttons {
             display: grid;
+
             grid-template-columns: 1fr 1fr;
+
             gap: 15px;
         }
 
         .ticket-button {
             display: flex;
+
             flex-direction: column;
+
             align-items: center;
             justify-content: center;
 
             padding: 24px 15px;
 
             background:
-                linear-gradient(145deg, #181818, #080808);
+                linear-gradient(
+                    145deg,
+                    #181818,
+                    #080808
+                );
 
             border: 1px solid #3a3a3a;
+
             border-radius: 14px;
 
             color: white;
+
             text-decoration: none;
 
             box-shadow:
-                0 0 15px rgba(0,0,0,0.5);
+                0 0 15px rgba(0, 0, 0, 0.5);
 
             transition: 0.25s;
         }
 
         .ticket-button span {
             font-size: 42px;
+
             margin-bottom: 10px;
         }
 
@@ -278,6 +324,7 @@
                 0 0 25px rgba(255, 60, 0, 0.35);
         }
 
+
         /* =========================
            AVISO
         ========================= */
@@ -290,8 +337,10 @@
             color: #888;
 
             font-size: 13px;
+
             line-height: 1.6;
         }
+
 
         /* =========================
            RODAPÉ
@@ -306,6 +355,7 @@
 
             font-size: 12px;
         }
+
 
         /* =========================
            CELULAR
@@ -337,10 +387,6 @@
                 padding: 16px;
             }
 
-            .price {
-                padding: 17px;
-            }
-
             .skull {
                 font-size: 50px;
             }
@@ -349,8 +395,11 @@
                 grid-template-columns: 1fr;
             }
         }
+
     </style>
+
 </head>
+
 
 <body>
 
@@ -358,12 +407,18 @@
 
     <div class="container">
 
+
         <!-- TÍTULO -->
+
         <div class="header">
 
-            <div class="skull">💀</div>
+            <div class="skull">
+                💀
+            </div>
 
-            <h1>HALLOWEEN 2026</h1>
+            <h1>
+                HALLOWEEN 2026
+            </h1>
 
             <p class="subtitle">
                 Uma noite para morrer de diversão.
@@ -371,98 +426,169 @@
 
         </div>
 
+
         <!-- DATA E ENDEREÇO -->
+
         <div class="event-info">
 
             <div class="event-box">
-                <strong>📅 Data</strong>
-                <span>31 de Outubro de 2026</span>
+
+                <strong>
+                    📅 Data
+                </strong>
+
+                <span>
+                    31 de Outubro de 2026
+                </span>
+
             </div>
 
+
             <div class="event-box">
-                <strong>📍 Local</strong>
+
+                <strong>
+                    📍 Local
+                </strong>
+
                 <span>
+
                     Rua Nigeria, 346 — Outeiro de Passargada
+
                     <br>
+
                     06719-630
+
                 </span>
+
             </div>
 
         </div>
 
+
         <!-- COMIDA E BEBIDA -->
+
         <div class="info">
 
             <div class="info-box">
-                <strong>🍔 COMIDA</strong>
-                <span>À vontade</span>
+
+                <strong>
+                    🍔 COMIDA
+                </strong>
+
+                <span>
+                    À vontade
+                </span>
+
             </div>
+
 
             <div class="info-box">
-                <strong>🥤 BEBIDA</strong>
-                <span>À vontade</span>
+
+                <strong>
+                    🥤 BEBIDA
+                </strong>
+
+                <span>
+                    À vontade
+                </span>
+
             </div>
 
         </div>
 
-        <!-- PREÇOS -->
-        <div class="prices">
-
-            <h2>VALORES DA ENTRADA</h2>
-
-            <div class="price">
-                <span class="price-name">Homens</span>
-                <span class="price-value">R$ 30</span>
-            </div>
-
-            <div class="price">
-                <span class="price-name">Mulheres</span>
-                <span class="price-value">R$ 20</span>
-            </div>
-
-        </div>
 
         <!-- ESCOLHA DO INGRESSO -->
+
         <div class="ticket-choice">
 
-            <h2>ESCOLHA SEU INGRESSO</h2>
+            <h2>
+                ESCOLHA SEU INGRESSO
+            </h2>
+
 
             <div class="ticket-buttons">
 
-                <a href="#" class="ticket-button">
-                    <span>👨</span>
-                    <strong>MASCULINO</strong>
-                    <small>R$ 30</small>
+
+                <!-- MASCULINO -->
+
+                <a
+                    href="#"
+                    class="ticket-button"
+                >
+
+                    <span>
+                        👨
+                    </span>
+
+                    <strong>
+                        MASCULINO
+                    </strong>
+
+                    <small>
+                        R$ 30
+                    </small>
+
                 </a>
 
-                <a href="#" class="ticket-button">
-                    <span>👩</span>
-                    <strong>FEMININO</strong>
-                    <small>R$ 20</small>
+
+                <!-- FEMININO -->
+
+                <a
+                    href="#"
+                    class="ticket-button"
+                >
+
+                    <span>
+                        👩
+                    </span>
+
+                    <strong>
+                        FEMININO
+                    </strong>
+
+                    <small>
+                        R$ 20
+                    </small>
+
                 </a>
+
 
             </div>
 
         </div>
 
+
         <!-- AVISO -->
+
         <p class="notice">
-            O ingresso será nominal e individual.<br>
-            Após a confirmação do pagamento, será enviado<br>
+
+            O ingresso será nominal e individual.
+
+            <br>
+
+            Após a confirmação do pagamento, será enviado
+
+            <br>
+
             um ingresso único com QR Code para entrada.
+
         </p>
 
+
         <!-- RODAPÉ -->
+
         <div class="footer">
+
             Halloween 2026 • Evento particular
+
         </div>
+
 
     </div>
 
 </div>
 
 </body>
-</html>
 
-</body>
+</html>
 </html>
