@@ -2,152 +2,116 @@
 <html lang="pt-BR">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Pagamento — Halloween 2026</title>
 
     <style>
-
         * {
             box-sizing: border-box;
-            margin: 0;
-            padding: 0;
         }
 
         body {
-
+            margin: 0;
             min-height: 100vh;
 
+            font-family: Arial, sans-serif;
+
             background:
-                radial-gradient(circle at top, #321000 0%, #0b0b0b 45%, #000 100%);
+                radial-gradient(circle at top, #3a1200, #120600 45%, #000 100%);
 
             color: white;
 
-            font-family: Arial, Helvetica, sans-serif;
-
             display: flex;
-
             justify-content: center;
-
             align-items: center;
 
-            padding: 25px;
-
+            padding: 20px;
         }
 
-        .payment-box {
-
+        .container {
             width: 100%;
+            max-width: 450px;
 
-            max-width: 430px;
+            background: rgba(15, 15, 15, 0.95);
 
-            background: #111;
+            border: 1px solid #ff6600;
 
-            border: 1px solid #333;
+            border-radius: 15px;
 
-            border-radius: 18px;
-
-            padding: 30px 25px;
-
-            text-align: center;
+            padding: 30px;
 
             box-shadow:
-                0 0 30px rgba(255, 69, 0, 0.18);
+                0 0 25px rgba(255, 102, 0, 0.25);
 
-        }
-
-        .icon {
-
-            font-size: 55px;
-
-            margin-bottom: 10px;
-
+            text-align: center;
         }
 
         h1 {
+            color: #ff6600;
 
-            color: #ff5a00;
-
-            font-size: 28px;
-
-            letter-spacing: 1px;
-
-            margin-bottom: 8px;
-
+            margin-bottom: 5px;
         }
 
         .subtitle {
-
             color: #aaa;
 
-            font-size: 14px;
-
             margin-bottom: 25px;
-
         }
 
-        .ticket-info {
+        .ticket {
+            background: #1c1c1c;
 
-            background: #181818;
-
-            border-left: 4px solid #ff5a00;
+            border: 1px solid #ff6600;
 
             border-radius: 10px;
 
             padding: 18px;
 
-            text-align: left;
-
-            margin-bottom: 25px;
-
+            margin-bottom: 20px;
         }
 
-        .ticket-info p {
-
-            margin-bottom: 12px;
-
-            color: #ddd;
-
-        }
-
-        .ticket-info p:last-child {
-
-            margin-bottom: 0;
-
+        .ticket p {
+            margin: 8px 0;
         }
 
         .label {
+            color: #999;
 
-            color: #ff5a00;
-
-            font-weight: bold;
-
+            font-size: 14px;
         }
 
-        .price {
+        .value {
+            color: #ff8c33;
 
-            font-size: 30px;
+            font-size: 20px;
 
             font-weight: bold;
+        }
 
-            color: #fff;
+        .id {
+            margin-top: 15px;
 
+            color: #777;
+
+            font-size: 12px;
+
+            word-break: break-all;
         }
 
         .copy-button {
-
             width: 100%;
 
-            padding: 16px;
+            margin-top: 10px;
+
+            padding: 15px;
 
             border: none;
 
-            border-radius: 10px;
+            border-radius: 8px;
 
-            background: #ff5a00;
+            background: #ff6600;
 
             color: white;
 
@@ -156,119 +120,95 @@
             font-weight: bold;
 
             cursor: pointer;
-
-            margin-bottom: 20px;
-
         }
 
         .copy-button:hover {
-
-            background: #ff6f26;
-
+            background: #ff7b26;
         }
 
-        .message {
+        .back {
+            display: block;
+
+            margin-top: 20px;
+
+            color: #aaa;
+
+            text-decoration: none;
+        }
+
+        .back:hover {
+            color: #ff6600;
+        }
+
+        .info {
+            margin-top: 20px;
 
             color: #aaa;
 
             font-size: 14px;
 
-            line-height: 1.7;
-
+            line-height: 1.5;
         }
-
-        .back {
-
-            display: inline-block;
-
-            margin-top: 22px;
-
-            color: #888;
-
-            text-decoration: none;
-
-            font-size: 13px;
-
-        }
-
-        .back:hover {
-
-            color: #ff5a00;
-
-        }
-
     </style>
 
 </head>
 
-
 <body>
 
+    <div class="container">
 
-    <div class="payment-box">
-
-
-        <div class="icon">
-            💀
-        </div>
-
-
-        <h1>
-            PAGAMENTO
-        </h1>
-
+        <h1>💀 PAGAMENTO</h1>
 
         <div class="subtitle">
             HALLOWEEN 2026
         </div>
 
 
-        <div class="ticket-info">
+        <div class="ticket">
 
+            <p class="label">
+                Ingresso
+            </p>
 
-            <p>
-
-                <span class="label">
-                    Ingresso:
-                </span>
-
-                <span id="tipoIngresso">
-                    Carregando...
-                </span>
-
+            <p
+                class="value"
+                id="tipoIngresso"
+            >
+                Carregando...
             </p>
 
 
-            <p>
-
-                <span class="label">
-                    Valor:
-                </span>
-
-                <span
-                    class="price"
-                    id="valorIngresso">
-
-                    --
-
-                </span>
-
+            <p class="label">
+                Valor
             </p>
 
+            <p
+                class="value"
+                id="valorIngresso"
+            >
+                --
+            </p>
+
+
+            <p
+                class="id"
+                id="idIngresso"
+            >
+                ID: carregando...
+            </p>
 
         </div>
 
 
         <button
             class="copy-button"
-            onclick="copiarPix()">
-
+            onclick="copiarPix()"
+        >
             📋 COPIAR PIX
-
         </button>
 
 
-        <div class="message">
+        <div class="info">
 
             Clique no botão acima para copiar o Pix
             e realizar o pagamento.
@@ -280,10 +220,10 @@
 
             <br><br>
 
-            Após realizar o pagamento,
-            aguarde a confirmação.
+            Após realizar o pagamento, aguarde a
+            confirmação.
 
-            <br>
+            <br><br>
 
             Seu ingresso com QR Code será liberado
             após a confirmação do pagamento.
@@ -293,157 +233,142 @@
 
         <a
             href="index.html"
-            class="back">
-
-            ← Voltar para o início
-
+            class="back"
+        >
+            ← Voltar
         </a>
-
 
     </div>
 
 
-    <script>
+<script>
+
+const parametros =
+    new URLSearchParams(window.location.search);
 
 
-        const parametros =
-            new URLSearchParams(
-                window.location.search
-            );
+const tipo =
+    parametros.get("tipo");
 
 
-        const tipo =
-            parametros.get("tipo");
+const id =
+    parametros.get("id");
 
 
-        const tipoIngresso =
-            document.getElementById(
-                "tipoIngresso"
-            );
+const tipoIngresso =
+    document.getElementById("tipoIngresso");
 
 
-        const valorIngresso =
-            document.getElementById(
-                "valorIngresso"
-            );
+const valorIngresso =
+    document.getElementById("valorIngresso");
 
 
-        let codigoPix = "";
+const idIngresso =
+    document.getElementById("idIngresso");
 
 
-        /*
-         * PIX MASCULINO — R$ 30,00
-         */
-
-        const pixMasculino =
-            "00020101021126580014br.gov.bcb.pix01365095c65f-58d8-45de-9b60-34b6fb8a5a40520400005303986540530.005802BR5919HENRIQUE S REBOUCAS6005COTIA62070503***63045931";
+let codigoPix = "";
 
 
-        /*
-         * PIX FEMININO — R$ 20,00
-         */
-
-        const pixFeminino =
-            "00020101021126580014br.gov.bcb.pix01365095c65f-58d8-45de-9b60-34b6fb8a5a40520400005303986540520.005802BR5919HENRIQUE S REBOUCAS6005COTIA62070503***6304CE67";
+const pixMasculino =
+    "00020101021126580014br.gov.bcb.pix01365095c65f-58d8-45de-9b60-34b6fb8a5a40520400005303986540530.005802BR5919HENRIQUE S REBOUCAS6005COTIA62070503***63045931";
 
 
-        if (tipo === "masculino") {
+const pixFeminino =
+    "00020101021126580014br.gov.bcb.pix01365095c65f-58d8-45de-9b60-34b6fb8a5a40520400005303986540520.005802BR5919HENRIQUE S REBOUCAS6005COTIA62070503***6304CE67";
 
 
-            tipoIngresso.textContent =
-                "👨 Masculino";
+if (tipo === "masculino") {
+
+    tipoIngresso.textContent =
+        "👨 Masculino";
+
+    valorIngresso.textContent =
+        "R$ 30";
+
+    codigoPix =
+        pixMasculino;
+
+}
+
+else if (tipo === "feminino") {
+
+    tipoIngresso.textContent =
+        "👩 Feminino";
+
+    valorIngresso.textContent =
+        "R$ 20";
+
+    codigoPix =
+        pixFeminino;
+
+}
+
+else {
+
+    tipoIngresso.textContent =
+        "Ingresso não selecionado";
+
+    valorIngresso.textContent =
+        "--";
+
+}
 
 
-            valorIngresso.textContent =
-                "R$ 30";
+if (id) {
+
+    idIngresso.textContent =
+        "ID: " + id;
+
+}
+
+else {
+
+    idIngresso.textContent =
+        "ID não encontrado";
+
+}
 
 
-            codigoPix =
-                pixMasculino;
+function copiarPix() {
+
+    if (!codigoPix) {
+
+        alert(
+            "Ingresso não selecionado."
+        );
+
+        return;
+
+    }
 
 
-        }
+    navigator.clipboard.writeText(
+        codigoPix
+    );
 
 
-        else if (tipo === "feminino") {
+    const botao =
+        document.querySelector(".copy-button");
 
 
-            tipoIngresso.textContent =
-                "👩 Feminino";
+    botao.textContent =
+        "✓ PIX COPIADO!";
 
 
-            valorIngresso.textContent =
-                "R$ 20";
-
-
-            codigoPix =
-                pixFeminino;
-
-
-        }
-
-
-        else {
-
-
-            tipoIngresso.textContent =
-                "Ingresso não selecionado";
-
-
-            valorIngresso.textContent =
-                "--";
-
-
-        }
-
-
-        function copiarPix() {
-
-
-            if (!codigoPix) {
-
-
-                alert(
-                    "Ingresso não selecionado."
-                );
-
-
-                return;
-
-            }
-
-
-            navigator.clipboard.writeText(
-                codigoPix
-            );
-
-
-            const botao =
-                document.querySelector(
-                    ".copy-button"
-                );
-
+    setTimeout(
+        function() {
 
             botao.textContent =
-                "✓ PIX COPIADO!";
+                "📋 COPIAR PIX";
 
+        },
+        2500
+    );
 
-            setTimeout(
-                function() {
+}
 
-                    botao.textContent =
-                        "📋 COPIAR PIX";
-
-                },
-                2500
-            );
-
-
-        }
-
-
-    </script>
-
+</script>
 
 </body>
 
