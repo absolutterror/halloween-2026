@@ -2,170 +2,123 @@
 <html lang="pt-BR">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Cadastro — Halloween 2026</title>
 
     <style>
-
         * {
             box-sizing: border-box;
-            margin: 0;
-            padding: 0;
         }
 
         body {
-
+            margin: 0;
             min-height: 100vh;
-
+            font-family: Arial, sans-serif;
             background:
-                radial-gradient(circle at top, #321000 0%, #0b0b0b 45%, #000 100%);
-
+                radial-gradient(circle at top, #3a1200, #120600 45%, #000 100%);
             color: white;
 
-            font-family: Arial, Helvetica, sans-serif;
-
             display: flex;
-
             justify-content: center;
-
             align-items: center;
 
-            padding: 25px;
-
+            padding: 20px;
         }
 
-        .form-box {
-
+        .container {
             width: 100%;
+            max-width: 450px;
 
-            max-width: 430px;
+            background: rgba(15, 15, 15, 0.95);
 
-            background: #111;
+            border: 1px solid #ff6600;
+            border-radius: 15px;
 
-            border: 1px solid #333;
-
-            border-radius: 18px;
-
-            padding: 30px 25px;
+            padding: 30px;
 
             box-shadow:
-                0 0 30px rgba(255, 69, 0, 0.18);
-
-        }
-
-        .icon {
-
-            text-align: center;
-
-            font-size: 55px;
-
-            margin-bottom: 10px;
-
+                0 0 25px rgba(255, 102, 0, 0.25);
         }
 
         h1 {
-
             text-align: center;
-
-            color: #ff5a00;
-
-            font-size: 28px;
-
-            letter-spacing: 1px;
-
-            margin-bottom: 8px;
-
+            color: #ff6600;
+            margin-bottom: 5px;
         }
 
         .subtitle {
-
             text-align: center;
-
             color: #aaa;
-
-            font-size: 14px;
-
             margin-bottom: 25px;
-
         }
 
-        .ticket-type {
+        .ticket {
+            text-align: center;
 
-            background: #181818;
+            background: #1c1c1c;
 
-            border-left: 4px solid #ff5a00;
-
+            border: 1px solid #ff6600;
             border-radius: 10px;
 
-            padding: 16px;
+            padding: 15px;
 
             margin-bottom: 25px;
 
-            text-align: center;
-
-            color: #ff5a00;
+            color: #ff8c33;
 
             font-weight: bold;
-
-            font-size: 17px;
-
         }
 
         label {
-
             display: block;
+
+            margin-top: 15px;
+            margin-bottom: 6px;
 
             color: #ddd;
 
-            font-size: 14px;
-
-            margin-bottom: 7px;
-
+            font-weight: bold;
         }
 
         input {
-
             width: 100%;
 
-            padding: 14px;
+            padding: 13px;
 
-            background: #080808;
+            border-radius: 8px;
 
-            border: 1px solid #333;
+            border: 1px solid #555;
 
-            border-radius: 9px;
+            background: #111;
 
             color: white;
 
             font-size: 15px;
-
-            outline: none;
-
-            margin-bottom: 18px;
-
         }
 
         input:focus {
+            outline: none;
 
-            border-color: #ff5a00;
+            border-color: #ff6600;
 
+            box-shadow:
+                0 0 8px rgba(255, 102, 0, 0.3);
         }
 
         .submit-button {
-
             width: 100%;
 
-            padding: 16px;
+            margin-top: 25px;
+
+            padding: 15px;
 
             border: none;
 
-            border-radius: 10px;
+            border-radius: 8px;
 
-            background: #ff5a00;
+            background: #ff6600;
 
             color: white;
 
@@ -174,84 +127,51 @@
             font-weight: bold;
 
             cursor: pointer;
-
-            margin-top: 5px;
-
         }
 
         .submit-button:hover {
-
-            background: #ff6f26;
-
+            background: #ff7b26;
         }
 
         .submit-button:disabled {
-
-            opacity: 0.6;
-
+            background: #555;
             cursor: not-allowed;
-
         }
 
         .back {
-
             display: block;
 
             text-align: center;
 
-            margin-top: 22px;
+            margin-top: 20px;
 
-            color: #888;
+            color: #aaa;
 
             text-decoration: none;
-
-            font-size: 13px;
-
         }
 
         .back:hover {
-
-            color: #ff5a00;
-
+            color: #ff6600;
         }
-
     </style>
 
 </head>
 
-
 <body>
 
+    <div class="container">
 
-    <div class="form-box">
-
-
-        <div class="icon">
-            🎃
-        </div>
-
-
-        <h1>
-            CADASTRO
-        </h1>
-
+        <h1>💀 CADASTRO</h1>
 
         <div class="subtitle">
             HALLOWEEN 2026
         </div>
 
-
-        <div
-            class="ticket-type"
-            id="ticketType">
-
+        <div class="ticket" id="ticketType">
             Carregando...
-
         </div>
 
-
         <form>
-
 
             <label for="nome">
                 Nome completo
@@ -260,9 +180,8 @@
             <input
                 type="text"
                 id="nome"
-                placeholder="Digite seu nome completo"
-                required>
-
+                required
+            >
 
             <label for="whatsapp">
                 WhatsApp
@@ -271,9 +190,8 @@
             <input
                 type="tel"
                 id="whatsapp"
-                placeholder="(11) 99999-9999"
-                required>
-
+                required
+            >
 
             <label for="email">
                 E-mail
@@ -282,205 +200,183 @@
             <input
                 type="email"
                 id="email"
-                placeholder="Digite seu e-mail"
-                required>
-
+                required
+            >
 
             <button
                 type="submit"
-                class="submit-button">
-
+                class="submit-button"
+            >
                 CONTINUAR
-
             </button>
-
 
         </form>
 
-
         <a
             href="index.html"
-            class="back">
-
-            ← Voltar para o início
-
+            class="back"
+        >
+            ← Voltar
         </a>
-
 
     </div>
 
 
-    <script>
+<script>
+
+const URL_SCRIPT =
+    "https://script.google.com/macros/s/AKfycby47FKISxM1brTG5wvQcEY5LBJcWfv6RO8p4ku7dBFJxfFNZp98bBbvptXaXk5Xfrzr/exec";
 
 
-        const URL_SCRIPT =
-            "https://script.google.com/macros/s/AKfycby47FKISxM1brTG5wvQcEY5LBjCWfv6RO8p4ku7dBFJxfFNZp98bBbvptXaXk5Xfrzr/exec";
+const parametros =
+    new URLSearchParams(window.location.search);
 
 
-        const parametros =
-            new URLSearchParams(
-                window.location.search
+const tipo =
+    parametros.get("tipo");
+
+
+const ticketType =
+    document.getElementById("ticketType");
+
+
+let valor = "";
+
+
+if (tipo === "masculino") {
+
+    ticketType.textContent =
+        "👨 Masculino — R$ 30";
+
+    valor = "30";
+
+}
+
+else if (tipo === "feminino") {
+
+    ticketType.textContent =
+        "👩 Feminino — R$ 20";
+
+    valor = "20";
+
+}
+
+else {
+
+    ticketType.textContent =
+        "Ingresso não selecionado";
+
+}
+
+
+const formulario =
+    document.querySelector("form");
+
+
+formulario.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        const nome =
+            document.getElementById("nome").value;
+
+        const whatsapp =
+            document.getElementById("whatsapp").value;
+
+        const email =
+            document.getElementById("email").value;
+
+
+        const botao =
+            document.querySelector(".submit-button");
+
+
+        /*
+         * GERA O ID ÚNICO DO INGRESSO
+         */
+
+        const id =
+            "HW26-" +
+            crypto.randomUUID()
+                .replace(/-/g, "")
+                .substring(0, 8)
+                .toUpperCase();
+
+
+        botao.disabled = true;
+
+        botao.textContent =
+            "ENVIANDO...";
+
+
+        try {
+
+            await fetch(URL_SCRIPT, {
+
+                method: "POST",
+
+                mode: "no-cors",
+
+                headers: {
+
+                    "Content-Type":
+                        "text/plain;charset=utf-8"
+
+                },
+
+                body: JSON.stringify({
+
+                    id: id,
+
+                    nome: nome,
+
+                    whatsapp: whatsapp,
+
+                    email: email,
+
+                    tipo: tipo,
+
+                    valor: valor
+
+                })
+
+            });
+
+
+            /*
+             * ENVIA O MESMO ID PARA A PÁGINA DE PAGAMENTO
+             */
+
+            window.location.href =
+                "pagamento.html?tipo=" +
+                encodeURIComponent(tipo) +
+                "&id=" +
+                encodeURIComponent(id);
+
+
+        }
+
+        catch (erro) {
+
+            alert(
+                "Não foi possível enviar o cadastro. Tente novamente."
             );
 
 
-        const tipo =
-            parametros.get("tipo");
+            botao.disabled = false;
 
-
-        const ticketType =
-            document.getElementById(
-                "ticketType"
-            );
-
-
-        let valor = "";
-
-
-        if (tipo === "masculino") {
-
-            ticketType.textContent =
-                "👨 Masculino — R$ 30";
-
-            valor = "30";
+            botao.textContent =
+                "CONTINUAR";
 
         }
 
-        else if (tipo === "feminino") {
+    }
+);
 
-            ticketType.textContent =
-                "👩 Feminino — R$ 20";
-
-            valor = "20";
-
-        }
-
-        else {
-
-            ticketType.textContent =
-                "Ingresso não selecionado";
-
-        }
-
-
-        const formulario =
-            document.querySelector("form");
-
-
-        formulario.addEventListener(
-            "submit",
-            async function(event) {
-
-                event.preventDefault();
-
-
-                const nome =
-                    document.getElementById(
-                        "nome"
-                    ).value;
-
-
-                const whatsapp =
-                    document.getElementById(
-                        "whatsapp"
-                    ).value;
-
-
-                const email =
-                    document.getElementById(
-                        "email"
-                    ).value;
-
-
-                const botao =
-                    document.querySelector(
-                        ".submit-button"
-                    );
-
-
-                botao.disabled = true;
-
-                botao.textContent =
-                    "ENVIANDO...";
-
-
-                try {
-
-
-                    await fetch(
-
-                        URL_SCRIPT,
-
-                        {
-
-                            method: "POST",
-
-                            mode: "no-cors",
-
-                            headers: {
-
-                                "Content-Type":
-                                    "text/plain;charset=utf-8"
-
-                            },
-
-                            body:
-                                JSON.stringify({
-
-                                    nome: nome,
-
-                                    whatsapp: whatsapp,
-
-                                    email: email,
-
-                                    tipo: tipo,
-
-                                    valor: valor
-
-                                })
-
-                        }
-
-                    );
-
-
-                    /*
-                     * Cadastro enviado com sucesso.
-                     *
-                     * Agora manda a pessoa
-                     * diretamente para a página
-                     * de pagamento.
-                     */
-
-                    window.location.href =
-                        "pagamento.html?tipo="
-                        + encodeURIComponent(tipo);
-
-
-                }
-
-                catch (erro) {
-
-
-                    alert(
-                        "Não foi possível enviar o cadastro. Tente novamente."
-                    );
-
-
-                    botao.disabled = false;
-
-                    botao.textContent =
-                        "CONTINUAR";
-
-
-                }
-
-            }
-
-        );
-
-
-    </script>
-
+</script>
 
 </body>
 
