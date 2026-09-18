@@ -5,10 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Cadastro — Halloween 2026</title>
+    <title>Pagamento — Halloween 2026</title>
 
     <style>
-
         * {
             box-sizing: border-box;
         }
@@ -16,15 +15,11 @@
         body {
             margin: 0;
             min-height: 100vh;
+
             font-family: Arial, sans-serif;
 
             background:
-                radial-gradient(
-                    circle at top,
-                    #3a1200,
-                    #120600 45%,
-                    #000 100%
-                );
+                radial-gradient(circle at top, #3a1200, #120600 45%, #000 100%);
 
             color: white;
 
@@ -42,83 +37,95 @@
             background: rgba(15, 15, 15, 0.95);
 
             border: 1px solid #ff6600;
+
             border-radius: 15px;
 
             padding: 30px;
 
             box-shadow:
                 0 0 25px rgba(255, 102, 0, 0.25);
+
+            text-align: center;
         }
 
         h1 {
-            text-align: center;
             color: #ff6600;
+
             margin-bottom: 5px;
         }
 
         .subtitle {
-            text-align: center;
             color: #aaa;
+
             margin-bottom: 25px;
         }
 
         .ticket {
-            text-align: center;
-
             background: #1c1c1c;
 
             border: 1px solid #ff6600;
+
             border-radius: 10px;
+
+            padding: 18px;
+
+            margin-bottom: 20px;
+        }
+
+        .ticket p {
+            margin: 8px 0;
+        }
+
+        .label {
+            color: #999;
+
+            font-size: 14px;
+        }
+
+        .value {
+            color: #ff8c33;
+
+            font-size: 20px;
+
+            font-weight: bold;
+        }
+
+        .id {
+            margin-top: 15px;
+
+            color: #777;
+
+            font-size: 12px;
+
+            word-break: break-all;
+        }
+
+        .qr-container {
+            margin: 20px auto;
 
             padding: 15px;
 
-            margin-bottom: 25px;
+            width: fit-content;
 
-            color: #ff8c33;
+            background: white;
 
-            font-weight: bold;
+            border-radius: 10px;
         }
 
-        label {
+        .qr-container img {
             display: block;
 
-            margin-top: 15px;
-            margin-bottom: 6px;
+            width: 250px;
 
-            color: #ddd;
+            max-width: 100%;
 
-            font-weight: bold;
+            height: auto;
         }
 
-        input {
+        .copy-button {
             width: 100%;
 
-            padding: 13px;
-
-            border-radius: 8px;
-
-            border: 1px solid #555;
-
-            background: #111;
-
-            color: white;
-
-            font-size: 15px;
-        }
-
-        input:focus {
-            outline: none;
-
-            border-color: #ff6600;
-
-            box-shadow:
-                0 0 8px rgba(255, 102, 0, 0.3);
-        }
-
-        .submit-button {
-            width: 100%;
-
-            margin-top: 25px;
+            margin-top: 10px;
 
             padding: 15px;
 
@@ -137,19 +144,56 @@
             cursor: pointer;
         }
 
-        .submit-button:hover {
+        .copy-button:hover {
             background: #ff7b26;
         }
 
-        .submit-button:disabled {
+        .copy-button:disabled {
             background: #555;
+
             cursor: not-allowed;
+        }
+
+        .status {
+            margin: 20px 0;
+
+            color: #aaa;
+
+            font-size: 15px;
+
+            line-height: 1.5;
+        }
+
+        .pix-area {
+            display: none;
+        }
+
+        .pix-code {
+            width: 100%;
+
+            min-height: 90px;
+
+            margin-top: 15px;
+
+            padding: 12px;
+
+            border-radius: 8px;
+
+            border: 1px solid #444;
+
+            background: #111;
+
+            color: #ccc;
+
+            font-size: 11px;
+
+            line-height: 1.4;
+
+            resize: none;
         }
 
         .back {
             display: block;
-
-            text-align: center;
 
             margin-top: 20px;
 
@@ -161,7 +205,6 @@
         .back:hover {
             color: #ff6600;
         }
-
     </style>
 
 </head>
@@ -170,63 +213,109 @@
 
     <div class="container">
 
-        <h1>💀 CADASTRO</h1>
+        <h1>💀 PAGAMENTO</h1>
 
         <div class="subtitle">
             HALLOWEEN 2026
         </div>
 
-        <div
-            class="ticket"
-            id="ticketType"
-        >
-            Carregando...
+
+        <div class="ticket">
+
+            <p class="label">
+                Ingresso
+            </p>
+
+            <p
+                class="value"
+                id="tipoIngresso"
+            >
+                Carregando...
+            </p>
+
+
+            <p class="label">
+                Valor
+            </p>
+
+            <p
+                class="value"
+                id="valorIngresso"
+            >
+                --
+            </p>
+
+
+            <p
+                class="id"
+                id="idIngresso"
+            >
+                ID: carregando...
+            </p>
+
         </div>
 
-        <form id="formulario">
 
-            <label for="nome">
-                Nome completo
-            </label>
+        <div
+            class="status"
+            id="status"
+        >
+            Gerando pagamento...
+        </div>
 
-            <input
-                type="text"
-                id="nome"
-                required
-            >
 
-            <label for="whatsapp">
-                WhatsApp
-            </label>
+        <div
+            class="pix-area"
+            id="pixArea"
+        >
 
-            <input
-                type="tel"
-                id="whatsapp"
-                required
-            >
+            <div class="qr-container">
 
-            <label for="cpf">
-                CPF
-            </label>
+                <img
+                    id="qrCode"
+                    alt="QR Code Pix"
+                >
 
-            <input
-                type="text"
-                id="cpf"
-                inputmode="numeric"
-                maxlength="14"
-                placeholder="000.000.000-00"
-                required
-            >
+            </div>
+
 
             <button
-                type="submit"
-                class="submit-button"
-                id="botao"
+                class="copy-button"
+                id="copyButton"
+                onclick="copiarPix()"
             >
-                CONTINUAR
+                📋 COPIAR PIX
             </button>
 
-        </form>
+
+            <textarea
+                class="pix-code"
+                id="pixCode"
+                readonly
+            ></textarea>
+
+
+            <div class="status">
+
+                Escaneie o QR Code ou copie o
+                Pix Copia e Cola para realizar
+                o pagamento.
+
+                <br><br>
+
+                Após realizar o pagamento,
+                aguarde a confirmação.
+
+                <br><br>
+
+                Seu ingresso com QR Code será
+                liberado após a confirmação
+                do pagamento.
+
+            </div>
+
+        </div>
+
 
         <a
             href="index.html"
@@ -240,368 +329,330 @@
 
 <script>
 
-// ==========================================================
+
+// ==========================================
 // CONFIGURAÇÃO
-// ==========================================================
+// ==========================================
 
 const URL_SCRIPT =
     "https://script.google.com/macros/s/AKfycby47FKISxM1brTG5wvQcEY5LBJcWfv6RO8p4ku7dBFJxfFNZp98bBbvptXaXk5Xfrzr/exec";
 
-
-// ==========================================================
-// PARÂMETROS DA URL
-// ==========================================================
 
 const parametros =
     new URLSearchParams(
         window.location.search
     );
 
+
 const tipo =
     parametros.get("tipo");
 
 
-// ==========================================================
+const id =
+    parametros.get("id");
+
+
+// ==========================================
 // ELEMENTOS
-// ==========================================================
+// ==========================================
 
-const ticketType =
+const tipoIngresso =
     document.getElementById(
-        "ticketType"
-    );
-
-const formulario =
-    document.getElementById(
-        "formulario"
-    );
-
-const botao =
-    document.getElementById(
-        "botao"
+        "tipoIngresso"
     );
 
 
-// ==========================================================
-// VALOR DO INGRESSO
-// ==========================================================
+const valorIngresso =
+    document.getElementById(
+        "valorIngresso"
+    );
 
-let valor = "";
 
+const idIngresso =
+    document.getElementById(
+        "idIngresso"
+    );
+
+
+const status =
+    document.getElementById(
+        "status"
+    );
+
+
+const pixArea =
+    document.getElementById(
+        "pixArea"
+    );
+
+
+const qrCode =
+    document.getElementById(
+        "qrCode"
+    );
+
+
+const pixCode =
+    document.getElementById(
+        "pixCode"
+    );
+
+
+const copyButton =
+    document.getElementById(
+        "copyButton"
+    );
+
+
+// ==========================================
+// MOSTRA TIPO
+// ==========================================
 
 if (tipo === "masculino") {
 
-    ticketType.textContent =
-        "👨 Masculino — R$ 30";
-
-    valor = "30";
+    tipoIngresso.textContent =
+        "👨 Masculino";
 
 }
 
 else if (tipo === "feminino") {
 
-    ticketType.textContent =
-        "👩 Feminino — R$ 20";
-
-    valor = "20";
+    tipoIngresso.textContent =
+        "👩 Feminino";
 
 }
 
 else {
 
-    ticketType.textContent =
+    tipoIngresso.textContent =
         "Ingresso não selecionado";
-
-    botao.disabled = true;
 
 }
 
 
-// ==========================================================
-// ENVIO DO FORMULÁRIO
-// ==========================================================
+// ==========================================
+// MOSTRA ID
+// ==========================================
 
-formulario.addEventListener(
-    "submit",
-    async function(event) {
+if (id) {
 
-        event.preventDefault();
+    idIngresso.textContent =
+        "ID: " + id;
+
+}
+
+else {
+
+    idIngresso.textContent =
+        "ID não encontrado";
+
+}
 
 
-        // ==================================================
-        // CONFERE TIPO
-        // ==================================================
+// ==========================================
+// VERIFICA ID
+// ==========================================
+
+if (!id) {
+
+    status.textContent =
+        "Não foi possível identificar o ingresso.";
+
+}
+
+else {
+
+    carregarPagamento();
+
+}
+
+
+// ==========================================
+// BUSCAR DADOS NO APPS SCRIPT
+// ==========================================
+
+async function carregarPagamento() {
+
+    try {
+
+        status.textContent =
+            "Gerando seu pagamento Pix...";
+
+
+        const resposta =
+            await fetch(
+                URL_SCRIPT +
+                "?id=" +
+                encodeURIComponent(id)
+            );
+
+
+        if (!resposta.ok) {
+
+            throw new Error(
+                "Erro HTTP " +
+                resposta.status
+            );
+
+        }
+
+
+        const dados =
+            await resposta.json();
+
+
+        console.log(
+            "Resposta do servidor:",
+            dados
+        );
+
+
+        if (!dados.sucesso) {
+
+            throw new Error(
+                dados.mensagem ||
+                "Não foi possível encontrar o ingresso."
+            );
+
+        }
+
+
+        // ==================================
+        // VALOR
+        // ==================================
+
+        valorIngresso.textContent =
+            "R$ " +
+            Number(dados.valor)
+                .toFixed(2)
+                .replace(".", ",");
+
+
+        // ==================================
+        // VERIFICA PIX
+        // ==================================
 
         if (
-            tipo !== "masculino" &&
-            tipo !== "feminino"
+            !dados.pixDisponivel ||
+            !dados.pixPayload ||
+            !dados.pixQrCode
         ) {
 
-            alert(
-                "Tipo de ingresso inválido."
+            throw new Error(
+                "O Pix ainda não está disponível."
             );
 
-            return;
         }
 
 
-        // ==================================================
-        // PEGA DADOS
-        // ==================================================
+        // ==================================
+        // MOSTRA QR CODE
+        // ==================================
 
-        const nome =
-            document.getElementById(
-                "nome"
-            ).value.trim();
+        qrCode.src =
+            "data:image/png;base64," +
+            dados.pixQrCode;
 
-        const whatsapp =
-            document.getElementById(
-                "whatsapp"
-            ).value.trim();
 
-        const cpf =
-            document.getElementById(
-                "cpf"
-            ).value.trim();
+        // ==================================
+        // MOSTRA PIX COPIA E COLA
+        // ==================================
 
+        pixCode.value =
+            dados.pixPayload;
 
-        // ==================================================
-        // GERA ID
-        // ==================================================
 
-        const id =
-            "HW26-" +
-            crypto.randomUUID()
-                .replace(/-/g, "")
-                .substring(0, 8)
-                .toUpperCase();
+        pixArea.style.display =
+            "block";
 
 
-        // ==================================================
-        // DESABILITA BOTÃO
-        // ==================================================
-
-        botao.disabled = true;
-
-        botao.textContent =
-            "PROCESSANDO...";
-
-
-        // ==================================================
-        // DADOS ENVIADOS
-        // ==================================================
-
-        const dados = {
-
-            id: id,
-
-            nome: nome,
-
-            whatsapp: whatsapp,
-
-            cpfCnpj: cpf,
-
-            tipo: tipo,
-
-            valor: valor
-
-        };
-
-
-        try {
-
-            // ==================================================
-            // ENVIA PARA APPS SCRIPT
-            // ==================================================
-
-            const resposta =
-                await fetch(
-                    URL_SCRIPT,
-                    {
-
-                        method: "POST",
-
-                        headers: {
-
-                            "Content-Type":
-                                "text/plain;charset=utf-8"
-
-                        },
-
-                        body:
-                            JSON.stringify(dados)
-
-                    }
-                );
-
-
-            // ==================================================
-            // CONFERE HTTP
-            // ==================================================
-
-            if (!resposta.ok) {
-
-                throw new Error(
-                    "Erro HTTP " +
-                    resposta.status
-                );
-
-            }
-
-
-            // ==================================================
-            // LÊ RESPOSTA
-            // ==================================================
-
-            const resultado =
-                await resposta.json();
-
-
-            console.log(
-                "Resposta do Apps Script:",
-                resultado
-            );
-
-
-            // ==================================================
-            // CONFERE SUCESSO
-            // ==================================================
-
-            if (
-                !resultado.sucesso
-            ) {
-
-                throw new Error(
-                    resultado.mensagem ||
-                    "Não foi possível criar o ingresso."
-                );
-
-            }
-
-
-            // ==================================================
-            // CONFERE PAYMENT ID
-            // ==================================================
-
-            if (
-                !resultado.paymentId
-            ) {
-
-                throw new Error(
-                    "O pagamento não foi criado no Asaas."
-                );
-
-            }
-
-
-            // ==================================================
-            // SUCESSO
-            // ==================================================
-
-            botao.textContent =
-                "INGRESSO CRIADO!";
-
-
-            // ==================================================
-            // VAI PARA PAGAMENTO
-            // ==================================================
-
-            window.location.href =
-                "pagamento.html?tipo=" +
-                encodeURIComponent(tipo) +
-                "&id=" +
-                encodeURIComponent(id);
-
-        }
-
-        catch (erro) {
-
-            console.error(
-                "Erro:",
-                erro
-            );
-
-
-            alert(
-                "Não foi possível criar o ingresso.\n\n" +
-                erro.message
-            );
-
-
-            botao.disabled =
-                false;
-
-            botao.textContent =
-                "CONTINUAR";
-
-        }
+        status.textContent =
+            "Pagamento Pix pronto. Escaneie o QR Code ou copie o código abaixo.";
 
     }
-);
+
+    catch (erro) {
+
+        console.error(
+            erro
+        );
 
 
-// ==========================================================
-// FORMATAÇÃO DO CPF
-// ==========================================================
+        status.textContent =
+            "Não foi possível carregar o pagamento. " +
+            erro.message;
 
-document
-    .getElementById("cpf")
-    .addEventListener(
-        "input",
-        function() {
+    }
 
-            let valorCpf =
-                this.value
-                    .replace(/\D/g, "");
-
-            valorCpf =
-                valorCpf.substring(
-                    0,
-                    11
-                );
+}
 
 
-            if (
-                valorCpf.length > 9
-            ) {
+// ==========================================
+// COPIAR PIX
+// ==========================================
 
-                valorCpf =
-                    valorCpf.replace(
-                        /(\d{3})(\d{3})(\d{3})(\d{2})/,
-                        "$1.$2.$3-$4"
-                    );
+async function copiarPix() {
 
-            }
+    if (!pixCode.value) {
 
-            else if (
-                valorCpf.length > 6
-            ) {
+        alert(
+            "Código Pix ainda não disponível."
+        );
 
-                valorCpf =
-                    valorCpf.replace(
-                        /(\d{3})(\d{3})(\d+)/,
-                        "$1.$2.$3"
-                    );
+        return;
 
-            }
-
-            else if (
-                valorCpf.length > 3
-            ) {
-
-                valorCpf =
-                    valorCpf.replace(
-                        /(\d{3})(\d+)/,
-                        "$1.$2"
-                    );
-
-            }
+    }
 
 
-            this.value =
-                valorCpf;
+    try {
 
-        }
-    );
+        await navigator.clipboard.writeText(
+            pixCode.value
+        );
+
+
+        copyButton.textContent =
+            "✓ PIX COPIADO!";
+
+
+        setTimeout(
+            function() {
+
+                copyButton.textContent =
+                    "📋 COPIAR PIX";
+
+            },
+            2500
+        );
+
+    }
+
+    catch (erro) {
+
+        pixCode.select();
+
+        document.execCommand(
+            "copy"
+        );
+
+
+        copyButton.textContent =
+            "✓ PIX COPIADO!";
+
+
+        setTimeout(
+            function() {
+
+                copyButton.textContent =
+                    "📋 COPIAR PIX";
+
+            },
+            2500
+        );
+
+    }
+
+}
 
 </script>
 
