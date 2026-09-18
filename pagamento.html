@@ -528,9 +528,8 @@ async function carregarPagamento() {
         // ==================================
 
         if (
-            !dados.pixDisponivel ||
             !dados.pixPayload ||
-            !dados.pixQrCode
+            !dados.encodedImage
         ) {
 
             throw new Error(
@@ -546,7 +545,7 @@ async function carregarPagamento() {
 
         qrCode.src =
             "data:image/png;base64," +
-            dados.pixQrCode;
+            dados.encodedImage;
 
 
         // ==================================
