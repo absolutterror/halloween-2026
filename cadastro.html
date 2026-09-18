@@ -8,6 +8,7 @@
     <title>Cadastro — Halloween 2026</title>
 
     <style>
+
         * {
             box-sizing: border-box;
         }
@@ -16,8 +17,15 @@
             margin: 0;
             min-height: 100vh;
             font-family: Arial, sans-serif;
+
             background:
-                radial-gradient(circle at top, #3a1200, #120600 45%, #000 100%);
+                radial-gradient(
+                    circle at top,
+                    #3a1200,
+                    #120600 45%,
+                    #000 100%
+                );
+
             color: white;
 
             display: flex;
@@ -153,6 +161,7 @@
         .back:hover {
             color: #ff6600;
         }
+
     </style>
 
 </head>
@@ -167,11 +176,14 @@
             HALLOWEEN 2026
         </div>
 
-        <div class="ticket" id="ticketType">
+        <div
+            class="ticket"
+            id="ticketType"
+        >
             Carregando...
         </div>
 
-        <form>
+        <form id="formulario">
 
             <label for="nome">
                 Nome completo
@@ -209,6 +221,7 @@
             <button
                 type="submit"
                 class="submit-button"
+                id="botao"
             >
                 CONTINUAR
             </button>
@@ -227,21 +240,50 @@
 
 <script>
 
+// ==========================================================
+// CONFIGURAÇÃO
+// ==========================================================
+
 const URL_SCRIPT =
     "https://script.google.com/macros/s/AKfycby47FKISxM1brTG5wvQcEY5LBJcWfv6RO8p4ku7dBFJxfFNZp98bBbvptXaXk5Xfrzr/exec";
 
 
-const parametros =
-    new URLSearchParams(window.location.search);
+// ==========================================================
+// PARÂMETROS DA URL
+// ==========================================================
 
+const parametros =
+    new URLSearchParams(
+        window.location.search
+    );
 
 const tipo =
     parametros.get("tipo");
 
 
-const ticketType =
-    document.getElementById("ticketType");
+// ==========================================================
+// ELEMENTOS
+// ==========================================================
 
+const ticketType =
+    document.getElementById(
+        "ticketType"
+    );
+
+const formulario =
+    document.getElementById(
+        "formulario"
+    );
+
+const botao =
+    document.getElementById(
+        "botao"
+    );
+
+
+// ==========================================================
+// VALOR DO INGRESSO
+// ==========================================================
 
 let valor = "";
 
@@ -269,12 +311,14 @@ else {
     ticketType.textContent =
         "Ingresso não selecionado";
 
+    botao.disabled = true;
+
 }
 
 
-const formulario =
-    document.querySelector("form");
-
+// ==========================================================
+// ENVIO DO FORMULÁRIO
+// ==========================================================
 
 formulario.addEventListener(
     "submit",
@@ -283,23 +327,46 @@ formulario.addEventListener(
         event.preventDefault();
 
 
+        // ==================================================
+        // CONFERE TIPO
+        // ==================================================
+
+        if (
+            tipo !== "masculino" &&
+            tipo !== "feminino"
+        ) {
+
+            alert(
+                "Tipo de ingresso inválido."
+            );
+
+            return;
+        }
+
+
+        // ==================================================
+        // PEGA DADOS
+        // ==================================================
+
         const nome =
-            document.getElementById("nome").value;
+            document.getElementById(
+                "nome"
+            ).value.trim();
 
         const whatsapp =
-            document.getElementById("whatsapp").value;
+            document.getElementById(
+                "whatsapp"
+            ).value.trim();
 
         const cpf =
-            document.getElementById("cpf").value;
+            document.getElementById(
+                "cpf"
+            ).value.trim();
 
 
-        const botao =
-            document.querySelector(".submit-button");
-
-
-        /*
-         * GERA O ID ÚNICO DO INGRESSO
-         */
+        // ==================================================
+        // GERA ID
+        // ==================================================
 
         const id =
             "HW26-" +
@@ -309,49 +376,134 @@ formulario.addEventListener(
                 .toUpperCase();
 
 
+        // ==================================================
+        // DESABILITA BOTÃO
+        // ==================================================
+
         botao.disabled = true;
 
         botao.textContent =
-            "ENVIANDO...";
+            "PROCESSANDO...";
+
+
+        // ==================================================
+        // DADOS ENVIADOS
+        // ==================================================
+
+        const dados = {
+
+            id: id,
+
+            nome: nome,
+
+            whatsapp: whatsapp,
+
+            cpfCnpj: cpf,
+
+            tipo: tipo,
+
+            valor: valor
+
+        };
 
 
         try {
 
-            await fetch(URL_SCRIPT, {
+            // ==================================================
+            // ENVIA PARA APPS SCRIPT
+            // ==================================================
 
-                method: "POST",
+            const resposta =
+                await fetch(
+                    URL_SCRIPT,
+                    {
 
-                mode: "no-cors",
+                        method: "POST",
 
-                headers: {
+                        headers: {
 
-                    "Content-Type":
-                        "text/plain;charset=utf-8"
+                            "Content-Type":
+                                "text/plain;charset=utf-8"
 
-                },
+                        },
 
-                body: JSON.stringify({
+                        body:
+                            JSON.stringify(dados)
 
-                    id: id,
-
-                    nome: nome,
-
-                    whatsapp: whatsapp,
-
-                    cpfCnpj: cpf,
-
-                    tipo: tipo,
-
-                    valor: valor
-
-                })
-
-            });
+                    }
+                );
 
 
-            /*
-             * ENVIA O MESMO ID PARA A PÁGINA DE PAGAMENTO
-             */
+            // ==================================================
+            // CONFERE HTTP
+            // ==================================================
+
+            if (!resposta.ok) {
+
+                throw new Error(
+                    "Erro HTTP " +
+                    resposta.status
+                );
+
+            }
+
+
+            // ==================================================
+            // LÊ RESPOSTA
+            // ==================================================
+
+            const resultado =
+                await resposta.json();
+
+
+            console.log(
+                "Resposta do Apps Script:",
+                resultado
+            );
+
+
+            // ==================================================
+            // CONFERE SUCESSO
+            // ==================================================
+
+            if (
+                !resultado.sucesso
+            ) {
+
+                throw new Error(
+                    resultado.mensagem ||
+                    "Não foi possível criar o ingresso."
+                );
+
+            }
+
+
+            // ==================================================
+            // CONFERE PAYMENT ID
+            // ==================================================
+
+            if (
+                !resultado.paymentId
+            ) {
+
+                throw new Error(
+                    "O pagamento não foi criado no Asaas."
+                );
+
+            }
+
+
+            // ==================================================
+            // SUCESSO
+            // ==================================================
+
+            botao.textContent =
+                "INGRESSO CRIADO!";
+
+
+            // ==================================================
+            // VAI PARA PAGAMENTO
+            // ==================================================
 
             window.location.href =
                 "pagamento.html?tipo=" +
@@ -359,17 +511,24 @@ formulario.addEventListener(
                 "&id=" +
                 encodeURIComponent(id);
 
-
         }
 
         catch (erro) {
 
-            alert(
-                "Não foi possível enviar o cadastro. Tente novamente."
+            console.error(
+                "Erro:",
+                erro
             );
 
 
-            botao.disabled = false;
+            alert(
+                "Não foi possível criar o ingresso.\n\n" +
+                erro.message
+            );
+
+
+            botao.disabled =
+                false;
 
             botao.textContent =
                 "CONTINUAR";
@@ -380,54 +539,69 @@ formulario.addEventListener(
 );
 
 
-/*
- * FORMATAÇÃO DO CPF
- */
+// ==========================================================
+// FORMATAÇÃO DO CPF
+// ==========================================================
 
 document
     .getElementById("cpf")
-    .addEventListener("input", function() {
+    .addEventListener(
+        "input",
+        function() {
 
-        let valorCpf =
-            this.value.replace(/\D/g, "");
-
-        valorCpf =
-            valorCpf.substring(0, 11);
-
-        if (valorCpf.length > 9) {
+            let valorCpf =
+                this.value
+                    .replace(/\D/g, "");
 
             valorCpf =
-                valorCpf.replace(
-                    /(\d{3})(\d{3})(\d{3})(\d{2})/,
-                    "$1.$2.$3-$4"
+                valorCpf.substring(
+                    0,
+                    11
                 );
 
+
+            if (
+                valorCpf.length > 9
+            ) {
+
+                valorCpf =
+                    valorCpf.replace(
+                        /(\d{3})(\d{3})(\d{3})(\d{2})/,
+                        "$1.$2.$3-$4"
+                    );
+
+            }
+
+            else if (
+                valorCpf.length > 6
+            ) {
+
+                valorCpf =
+                    valorCpf.replace(
+                        /(\d{3})(\d{3})(\d+)/,
+                        "$1.$2.$3"
+                    );
+
+            }
+
+            else if (
+                valorCpf.length > 3
+            ) {
+
+                valorCpf =
+                    valorCpf.replace(
+                        /(\d{3})(\d+)/,
+                        "$1.$2"
+                    );
+
+            }
+
+
+            this.value =
+                valorCpf;
+
         }
-
-        else if (valorCpf.length > 6) {
-
-            valorCpf =
-                valorCpf.replace(
-                    /(\d{3})(\d{3})(\d+)/,
-                    "$1.$2.$3"
-                );
-
-        }
-
-        else if (valorCpf.length > 3) {
-
-            valorCpf =
-                valorCpf.replace(
-                    /(\d{3})(\d+)/,
-                    "$1.$2"
-                );
-
-        }
-
-        this.value =
-            valorCpf;
-
-    });
+    );
 
 </script>
 
