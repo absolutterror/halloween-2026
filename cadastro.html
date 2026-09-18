@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -244,8 +245,11 @@
 // CONFIGURAÇÃO
 // ==========================================================
 
-const URL_SCRIPT =
-    "https://script.google.com/macros/s/AKfycby47FKISxM1brTG5wvQcEY5LBJcWfv6RO8p4ku7dBFJxfFNZp98bBbvptXaXk5Xfrzr/exec";
+// AGORA O SITE FALA COM O CLOUDFLARE WORKER
+// E NÃO DIRETAMENTE COM O GOOGLE APPS SCRIPT.
+
+const URL_API =
+    "https://halloween-2026-webhook.henriquereboucas13.workers.dev";
 
 
 // ==========================================================
@@ -410,12 +414,12 @@ formulario.addEventListener(
         try {
 
             // ==================================================
-            // ENVIA PARA APPS SCRIPT
+            // ENVIA PARA O CLOUDFLARE WORKER
             // ==================================================
 
             const resposta =
                 await fetch(
-                    URL_SCRIPT,
+                    URL_API,
                     {
 
                         method: "POST",
@@ -457,7 +461,7 @@ formulario.addEventListener(
 
 
             console.log(
-                "Resposta do Apps Script:",
+                "Resposta do sistema:",
                 resultado
             );
 
@@ -608,3 +612,4 @@ document
 </body>
 
 </html>
+```
