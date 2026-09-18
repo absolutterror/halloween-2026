@@ -3,349 +3,429 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Ingresso — Halloween 2026</title>
+<title>Meu Ingresso — Halloween 2026</title>
 
-    <style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<style>
 
-        body {
+* {
+    box-sizing: border-box;
+}
 
-            min-height: 100vh;
+body {
 
-            background:
-                radial-gradient(circle at top, #321000 0%, #0b0b0b 45%, #000 100%);
+    margin: 0;
 
-            color: white;
+    min-height: 100vh;
 
-            font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 
-            display: flex;
+    background:
+        radial-gradient(circle at top, #351000 0%, #120600 40%, #050505 100%);
 
-            justify-content: center;
+    color: white;
 
-            align-items: center;
+    display: flex;
 
-            padding: 25px;
+    justify-content: center;
 
-        }
+    align-items: center;
 
-        .ticket {
+    padding: 20px;
 
-            width: 100%;
+}
 
-            max-width: 430px;
+.container {
 
-            background: #111;
+    width: 100%;
 
-            border: 1px solid #333;
+    max-width: 430px;
 
-            border-radius: 18px;
+    background: rgba(15, 15, 15, 0.95);
 
-            padding: 30px 25px;
+    border: 1px solid #ff6a00;
 
-            text-align: center;
+    border-radius: 18px;
 
-            box-shadow:
-                0 0 30px rgba(255, 69, 0, 0.18);
+    padding: 30px 22px;
 
-        }
+    text-align: center;
 
-        .icon {
+    box-shadow:
+        0 0 25px rgba(255, 106, 0, 0.25);
 
-            font-size: 55px;
+}
 
-            margin-bottom: 10px;
+h1 {
 
-        }
+    margin-top: 0;
 
-        h1 {
+    color: #ff6a00;
 
-            color: #ff5a00;
+    font-size: 28px;
 
-            font-size: 30px;
+}
 
-            letter-spacing: 2px;
+h2 {
 
-            margin-bottom: 5px;
+    font-size: 20px;
 
-        }
+    margin-bottom: 8px;
 
-        .subtitle {
+}
 
-            color: #aaa;
+.info {
 
-            font-size: 14px;
+    color: #ccc;
 
-            margin-bottom: 25px;
+    font-size: 14px;
 
-        }
+    line-height: 1.6;
 
-        .info {
+}
 
-            background: #181818;
+.id {
 
-            border-left: 4px solid #ff5a00;
+    display: inline-block;
 
-            border-radius: 10px;
+    margin: 15px 0;
 
-            padding: 18px;
+    padding: 10px 15px;
 
-            text-align: left;
+    border-radius: 8px;
 
-            margin-bottom: 25px;
+    background: #1d1d1d;
 
-        }
+    border: 1px solid #333;
 
-        .info p {
+    font-weight: bold;
 
-            margin-bottom: 12px;
+    color: #ff8c33;
 
-            color: #ddd;
+}
 
-        }
+.status {
 
-        .info p:last-child {
+    margin-top: 20px;
 
-            margin-bottom: 0;
+    padding: 15px;
 
-        }
+    border-radius: 10px;
 
-        .label {
+    font-size: 15px;
 
-            color: #ff5a00;
+    line-height: 1.5;
 
-            font-weight: bold;
+}
 
-        }
+.pendente {
 
-        .qr-area {
+    background: #2a1d00;
 
-            background: white;
+    border: 1px solid #ffb000;
 
-            border-radius: 14px;
+    color: #ffd36a;
 
-            padding: 18px;
+}
 
-            display: inline-block;
+.pago {
 
-            margin-bottom: 20px;
+    background: #092411;
 
-        }
+    border: 1px solid #25c45a;
 
-        #qrcode img {
+    color: #7dff9f;
 
-            display: block;
+}
 
-        }
+.erro {
 
-        .qr-text {
+    background: #2a0808;
 
-            color: #aaa;
+    border: 1px solid #ff3333;
 
-            font-size: 13px;
+    color: #ff8c8c;
 
-            line-height: 1.5;
+}
 
-            margin-bottom: 15px;
+#qrcode {
 
-        }
+    margin: 25px auto;
 
-        .id {
+    padding: 15px;
 
-            display: inline-block;
+    background: white;
 
-            background: #080808;
+    width: fit-content;
 
-            border: 1px solid #333;
+    border-radius: 10px;
 
-            border-radius: 8px;
+}
 
-            padding: 10px 14px;
+.hidden {
 
-            color: #ff5a00;
+    display: none;
 
-            font-weight: bold;
+}
 
-            font-size: 14px;
+.detalhes {
 
-            word-break: break-all;
+    margin-top: 20px;
 
-        }
+    text-align: left;
 
-        .warning {
+    background: #111;
 
-            margin-top: 20px;
+    padding: 15px;
 
-            color: #888;
+    border-radius: 10px;
 
-            font-size: 12px;
+    border: 1px solid #292929;
 
-            line-height: 1.5;
+}
 
-        }
+.detalhes p {
 
-        .erro {
+    margin: 8px 0;
 
-            color: #ff4444;
+    font-size: 14px;
 
-            font-size: 18px;
+}
 
-            line-height: 1.6;
+.detalhes strong {
 
-        }
+    color: #ff8c33;
 
-    </style>
+}
+
+.carregando {
+
+    color: #ccc;
+
+    margin-top: 20px;
+
+}
+
+</style>
 
 </head>
 
-
 <body>
 
+<div class="container">
 
-    <div class="ticket">
+    <h1>🎃 HALLOWEEN 2026</h1>
 
-        <div class="icon">
-            🎃
-        </div>
+    <h2>MEU INGRESSO</h2>
 
-        <h1>HALLOWEEN 2026</h1>
+    <div class="info">
 
-        <div class="subtitle">
-            INGRESSO INDIVIDUAL
-        </div>
+        31 de Outubro de 2026<br>
 
+        Rua Nigeria, 346 — Outeiro de Passargada<br>
 
-        <div id="conteudo">
-
-            <div class="erro">
-                Carregando ingresso...
-            </div>
-
-        </div>
-
+        06719-630
 
     </div>
 
+    <div class="id" id="idIngresso">
 
-    <!-- Biblioteca gratuita para gerar QR Code -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+        Carregando...
+
+    </div>
+
+    <div id="carregando" class="carregando">
+
+        Consultando seu ingresso...
+
+    </div>
+
+    <div id="statusPendente" class="status pendente hidden">
+
+        ⏳ <strong>Pagamento pendente</strong><br><br>
+
+        Seu pagamento ainda não foi confirmado.
+
+        O QR Code será liberado após a confirmação do pagamento.
+
+    </div>
+
+    <div id="statusPago" class="hidden">
+
+        <div class="status pago">
+
+            ✅ <strong>Pagamento confirmado!</strong><br><br>
+
+            Seu ingresso está liberado.
+
+        </div>
+
+        <div class="detalhes">
+
+            <p>
+                <strong>Nome:</strong>
+                <span id="nome"></span>
+            </p>
+
+            <p>
+                <strong>Tipo:</strong>
+                <span id="tipo"></span>
+            </p>
+
+            <p>
+                <strong>Valor:</strong>
+                R$ <span id="valor"></span>
+            </p>
+
+        </div>
+
+        <p class="info">
+
+            Apresente este QR Code na entrada do evento.
+
+        </p>
+
+        <div id="qrcode"></div>
+
+    </div>
+
+    <div id="statusErro" class="status erro hidden">
+
+        ❌ <strong>Ingresso não encontrado</strong><br><br>
+
+        Verifique se o link do ingresso está correto.
+
+    </div>
+
+</div>
 
 
-    <script>
+<script>
 
-        const parametros =
-            new URLSearchParams(window.location.search);
-
-
-        const id =
-            parametros.get("id");
+const API_URL =
+"https://script.google.com/macros/s/AKfycby47FKISxM1brTG5wvQcEY5LBJcWfv6RO8p4ku7dBFJxfFNZp98bBbvptXaXk5Xfrzr/exec";
 
 
-        const conteudo =
-            document.getElementById("conteudo");
+const parametros = new URLSearchParams(window.location.search);
+
+const id = parametros.get("id");
 
 
-        if (!id) {
+document.getElementById("idIngresso").textContent =
+    id ? "ID: " + id : "ID não informado";
 
-            conteudo.innerHTML = `
 
-                <div class="erro">
+if (!id) {
 
-                    Ingresso inválido.
+    document.getElementById("carregando").classList.add("hidden");
 
-                    <br><br>
+    document.getElementById("statusErro").classList.remove("hidden");
 
-                    Nenhum ID foi informado.
+} else {
 
-                </div>
+    consultarIngresso();
 
-            `;
+}
+
+
+async function consultarIngresso() {
+
+    try {
+
+        const resposta = await fetch(
+            API_URL + "?id=" + encodeURIComponent(id)
+        );
+
+        const dados = await resposta.json();
+
+
+        document.getElementById("carregando").classList.add("hidden");
+
+
+        if (!dados.sucesso) {
+
+            document
+                .getElementById("statusErro")
+                .classList.remove("hidden");
+
+            return;
 
         }
 
-        else {
 
-            conteudo.innerHTML = `
+        /*
+         * PAGAMENTO PENDENTE
+         */
 
-                <div class="info">
+        if (dados.pagamento !== "Pago") {
 
-                    <p>
-                        <span class="label">Ingresso:</span>
-                        Halloween 2026
-                    </p>
+            document
+                .getElementById("statusPendente")
+                .classList.remove("hidden");
 
-                    <p>
-                        <span class="label">ID:</span>
-                        ${id}
-                    </p>
-
-                </div>
-
-
-                <div class="qr-area">
-
-                    <div id="qrcode"></div>
-
-                </div>
-
-
-                <p class="qr-text">
-
-                    Apresente este QR Code na entrada do evento.
-
-                    <br>
-
-                    Este ingresso é individual e não deve ser compartilhado.
-
-                </p>
-
-
-                <div class="id">
-
-                    ${id}
-
-                </div>
-
-
-                <p class="warning">
-
-                    31 de Outubro de 2026
-
-                    <br>
-
-                    Rua Nigeria, 346 — Outeiro de Passargada
-
-                    <br>
-
-                    06719-630
-
-                </p>
-
-            `;
-
-
-            new QRCode(
-                document.getElementById("qrcode"),
-                {
-                    text: id,
-                    width: 220,
-                    height: 220
-                }
-            );
+            return;
 
         }
 
-    </script>
 
+        /*
+         * PAGAMENTO CONFIRMADO
+         */
+
+        document
+            .getElementById("statusPago")
+            .classList.remove("hidden");
+
+
+        document.getElementById("nome").textContent =
+            dados.nome;
+
+
+        document.getElementById("tipo").textContent =
+            dados.tipo === "masculino"
+                ? "Masculino"
+                : "Feminino";
+
+
+        document.getElementById("valor").textContent =
+            Number(dados.valor).toFixed(2).replace(".", ",");
+
+
+        /*
+         * GERA O QR CODE
+         */
+
+        new QRCode(
+            document.getElementById("qrcode"),
+            {
+                text: dados.id,
+                width: 220,
+                height: 220
+            }
+        );
+
+    } catch (erro) {
+
+        console.error(erro);
+
+        document
+            .getElementById("carregando")
+            .classList.add("hidden");
+
+        document
+            .getElementById("statusErro")
+            .classList.remove("hidden");
+
+    }
+
+}
+
+</script>
 
 </body>
 
