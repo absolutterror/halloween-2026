@@ -50,13 +50,11 @@
 
         h1 {
             color: #ff6600;
-
             margin-bottom: 5px;
         }
 
         .subtitle {
             color: #aaa;
-
             margin-bottom: 25px;
         }
 
@@ -78,7 +76,6 @@
 
         .label {
             color: #999;
-
             font-size: 14px;
         }
 
@@ -100,32 +97,54 @@
             word-break: break-all;
         }
 
-        .qr-container {
-            margin: 20px auto;
+        .status {
+            margin: 20px 0;
+
+            color: #aaa;
+
+            font-size: 15px;
+
+            line-height: 1.5;
+        }
+
+        .pix-area {
+            margin-top: 20px;
+        }
+
+        .pix-title {
+            color: #ff6600;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            margin-bottom: 10px;
+        }
+
+        .pix-key {
+            width: 100%;
 
             padding: 15px;
 
-            width: fit-content;
+            border-radius: 8px;
 
-            background: white;
+            border: 1px solid #444;
 
-            border-radius: 10px;
-        }
+            background: #111;
 
-        .qr-container img {
-            display: block;
+            color: #fff;
 
-            width: 250px;
+            font-size: 13px;
 
-            max-width: 100%;
+            text-align: center;
 
-            height: auto;
+            word-break: break-all;
+
+            margin-bottom: 10px;
         }
 
         .copy-button {
             width: 100%;
-
-            margin-top: 10px;
 
             padding: 15px;
 
@@ -148,48 +167,14 @@
             background: #ff7b26;
         }
 
-        .copy-button:disabled {
-            background: #555;
-
-            cursor: not-allowed;
-        }
-
-        .status {
-            margin: 20px 0;
+        .instructions {
+            margin-top: 20px;
 
             color: #aaa;
 
-            font-size: 15px;
+            font-size: 14px;
 
-            line-height: 1.5;
-        }
-
-        .pix-area {
-            display: none;
-        }
-
-        .pix-code {
-            width: 100%;
-
-            min-height: 90px;
-
-            margin-top: 15px;
-
-            padding: 12px;
-
-            border-radius: 8px;
-
-            border: 1px solid #444;
-
-            background: #111;
-
-            color: #ccc;
-
-            font-size: 11px;
-
-            line-height: 1.4;
-
-            resize: none;
+            line-height: 1.6;
         }
 
         .back {
@@ -260,22 +245,22 @@
             class="status"
             id="status"
         >
-            Gerando pagamento...
+            Carregando informações do ingresso...
         </div>
 
 
-        <div
-            class="pix-area"
-            id="pixArea"
-        >
+        <div class="pix-area">
 
-            <div class="qr-container">
+            <div class="pix-title">
+                PIX PARA PAGAMENTO
+            </div>
 
-                <img
-                    id="qrCode"
-                    alt="QR Code Pix"
-                >
 
+            <div
+                class="pix-key"
+                id="pixKey"
+            >
+                8f634b64-2b18-4957-88c6-98cc8b26f937
             </div>
 
 
@@ -288,18 +273,10 @@
             </button>
 
 
-            <textarea
-                class="pix-code"
-                id="pixCode"
-                readonly
-            ></textarea>
+            <div class="instructions">
 
-
-            <div class="status">
-
-                Escaneie o QR Code ou copie o
-                Pix Copia e Cola para realizar
-                o pagamento.
+                Copie a chave Pix acima e faça o
+                pagamento pelo aplicativo do seu banco.
 
                 <br><br>
 
@@ -308,9 +285,8 @@
 
                 <br><br>
 
-                Seu ingresso com QR Code será
-                liberado após a confirmação
-                do pagamento.
+                Seu ingresso será liberado
+                após a confirmação do pagamento.
 
             </div>
 
@@ -336,6 +312,10 @@
 
 const URL_SCRIPT =
     "https://script.google.com/macros/s/AKfycby47FKISxM1brTG5wvQcEY5LBJcWfv6RO8p4ku7dBFJxfFNZp98bBbvptXaXk5Xfrzr/exec";
+
+
+const CHAVE_PIX =
+    "8f634b64-2b18-4957-88c6-98cc8b26f937";
 
 
 const parametros =
@@ -380,21 +360,9 @@ const status =
     );
 
 
-const pixArea =
+const pixKey =
     document.getElementById(
-        "pixArea"
-    );
-
-
-const qrCode =
-    document.getElementById(
-        "qrCode"
-    );
-
-
-const pixCode =
-    document.getElementById(
-        "pixCode"
+        "pixKey"
     );
 
 
@@ -402,6 +370,14 @@ const copyButton =
     document.getElementById(
         "copyButton"
     );
+
+
+// ==========================================
+// MOSTRA CHAVE PIX
+// ==========================================
+
+pixKey.textContent =
+    CHAVE_PIX;
 
 
 // ==========================================
@@ -468,7 +444,7 @@ else {
 
 
 // ==========================================
-// BUSCAR DADOS NO APPS SCRIPT
+// BUSCAR DADOS DO INGRESSO
 // ==========================================
 
 async function carregarPagamento() {
@@ -476,7 +452,7 @@ async function carregarPagamento() {
     try {
 
         status.textContent =
-            "Gerando seu pagamento Pix...";
+            "Carregando dados do ingresso...";
 
 
         const resposta =
@@ -518,7 +494,7 @@ async function carregarPagamento() {
 
 
         // ==================================
-        // VALOR
+        // MOSTRA VALOR
         // ==================================
 
         valorIngresso.textContent =
@@ -529,45 +505,11 @@ async function carregarPagamento() {
 
 
         // ==================================
-        // VERIFICA PIX
+        // PAGAMENTO PIX
         // ==================================
-
-        if (
-            !dados.pixDisponivel ||
-            !dados.pixPayload ||
-            !dados.pixQrCode
-        ) {
-
-            throw new Error(
-                "O Pix ainda não está disponível."
-            );
-
-        }
-
-
-        // ==================================
-        // MOSTRA QR CODE
-        // ==================================
-
-        qrCode.src =
-            "data:image/png;base64," +
-            dados.pixQrCode;
-
-
-        // ==================================
-        // MOSTRA PIX COPIA E COLA
-        // ==================================
-
-        pixCode.value =
-            dados.pixPayload;
-
-
-        pixArea.style.display =
-            "block";
-
 
         status.textContent =
-            "Pagamento Pix pronto. Escaneie o QR Code ou copie o código abaixo.";
+            "Copie a chave Pix abaixo para realizar o pagamento.";
 
     }
 
@@ -579,7 +521,7 @@ async function carregarPagamento() {
 
 
         status.textContent =
-            "Não foi possível carregar o pagamento. " +
+            "Não foi possível carregar os dados do ingresso. " +
             erro.message;
 
     }
@@ -588,26 +530,15 @@ async function carregarPagamento() {
 
 
 // ==========================================
-// COPIAR PIX
+// COPIAR CHAVE PIX
 // ==========================================
 
 async function copiarPix() {
 
-    if (!pixCode.value) {
-
-        alert(
-            "Código Pix ainda não disponível."
-        );
-
-        return;
-
-    }
-
-
     try {
 
         await navigator.clipboard.writeText(
-            pixCode.value
+            CHAVE_PIX
         );
 
 
@@ -629,10 +560,29 @@ async function copiarPix() {
 
     catch (erro) {
 
-        pixCode.select();
+        const campo =
+            document.createElement("textarea");
+
+
+        campo.value =
+            CHAVE_PIX;
+
+
+        document.body.appendChild(
+            campo
+        );
+
+
+        campo.select();
+
 
         document.execCommand(
             "copy"
+        );
+
+
+        document.body.removeChild(
+            campo
         );
 
 
