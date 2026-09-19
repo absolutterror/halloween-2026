@@ -26,7 +26,12 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 
     background:
-        radial-gradient(circle at top, #351000 0%, #120600 40%, #050505 100%);
+        radial-gradient(
+            circle at top,
+            #351000 0%,
+            #120600 40%,
+            #050505 100%
+        );
 
     color: white;
 
@@ -37,7 +42,6 @@ body {
     align-items: center;
 
     padding: 20px;
-
 }
 
 .container {
@@ -58,7 +62,6 @@ body {
 
     box-shadow:
         0 0 25px rgba(255, 106, 0, 0.25);
-
 }
 
 h1 {
@@ -68,7 +71,6 @@ h1 {
     color: #ff6a00;
 
     font-size: 28px;
-
 }
 
 h2 {
@@ -76,7 +78,6 @@ h2 {
     font-size: 20px;
 
     margin-bottom: 8px;
-
 }
 
 .info {
@@ -86,7 +87,6 @@ h2 {
     font-size: 14px;
 
     line-height: 1.6;
-
 }
 
 .id {
@@ -107,6 +107,7 @@ h2 {
 
     color: #ff8c33;
 
+    word-break: break-all;
 }
 
 .status {
@@ -120,7 +121,6 @@ h2 {
     font-size: 15px;
 
     line-height: 1.5;
-
 }
 
 .pendente {
@@ -130,7 +130,6 @@ h2 {
     border: 1px solid #ffb000;
 
     color: #ffd36a;
-
 }
 
 .pago {
@@ -140,7 +139,6 @@ h2 {
     border: 1px solid #25c45a;
 
     color: #7dff9f;
-
 }
 
 .erro {
@@ -150,7 +148,6 @@ h2 {
     border: 1px solid #ff3333;
 
     color: #ff8c8c;
-
 }
 
 #qrcode {
@@ -165,12 +162,27 @@ h2 {
 
     border-radius: 10px;
 
+    min-height: 250px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+#qrcode img {
+
+    display: block;
+
+    width: 220px;
+
+    height: 220px;
 }
 
 .hidden {
 
     display: none;
-
 }
 
 .detalhes {
@@ -186,7 +198,6 @@ h2 {
     border-radius: 10px;
 
     border: 1px solid #292929;
-
 }
 
 .detalhes p {
@@ -194,13 +205,11 @@ h2 {
     margin: 8px 0;
 
     font-size: 14px;
-
 }
 
 .detalhes strong {
 
     color: #ff8c33;
-
 }
 
 .carregando {
@@ -208,7 +217,17 @@ h2 {
     color: #ccc;
 
     margin-top: 20px;
+}
 
+.aviso-qr {
+
+    color: #aaa;
+
+    font-size: 12px;
+
+    margin-top: -15px;
+
+    line-height: 1.5;
 }
 
 </style>
@@ -233,11 +252,13 @@ h2 {
 
     </div>
 
+
     <div class="id" id="idIngresso">
 
         Carregando...
 
     </div>
+
 
     <div id="carregando" class="carregando">
 
@@ -245,25 +266,44 @@ h2 {
 
     </div>
 
-    <div id="statusPendente" class="status pendente hidden">
 
-        ⏳ <strong>Pagamento pendente</strong><br><br>
+    <!-- PAGAMENTO PENDENTE -->
+
+    <div
+        id="statusPendente"
+        class="status pendente hidden"
+    >
+
+        ⏳ <strong>Pagamento pendente</strong>
+
+        <br><br>
 
         Seu pagamento ainda não foi confirmado.
+
+        <br><br>
 
         O QR Code será liberado após a confirmação do pagamento.
 
     </div>
 
-    <div id="statusPago" class="hidden">
+
+    <!-- PAGAMENTO PAGO -->
+
+    <div
+        id="statusPago"
+        class="hidden"
+    >
 
         <div class="status pago">
 
-            ✅ <strong>Pagamento confirmado!</strong><br><br>
+            ✅ <strong>Pagamento confirmado!</strong>
+
+            <br><br>
 
             Seu ingresso está liberado.
 
         </div>
+
 
         <div class="detalhes">
 
@@ -284,19 +324,36 @@ h2 {
 
         </div>
 
+
         <p class="info">
 
             Apresente este QR Code na entrada do evento.
 
         </p>
 
+
         <div id="qrcode"></div>
+
+
+        <p class="aviso-qr">
+
+            Este QR Code é exclusivo deste ingresso.
+
+        </p>
 
     </div>
 
-    <div id="statusErro" class="status erro hidden">
 
-        ❌ <strong>Ingresso não encontrado</strong><br><br>
+    <!-- ERRO -->
+
+    <div
+        id="statusErro"
+        class="status erro hidden"
+    >
+
+        ❌ <strong>Ingresso não encontrado</strong>
+
+        <br><br>
 
         Verifique se o link do ingresso está correto.
 
@@ -311,20 +368,46 @@ const API_URL =
 "https://script.google.com/macros/s/AKfycby47FKISxM1brTG5wvQcEY5LBJcWfv6RO8p4ku7dBFJxfFNZp98bBbvptXaXk5Xfrzr/exec";
 
 
-const parametros = new URLSearchParams(window.location.search);
+/*
+ * ============================================================
+ * PEGAR ID DA URL
+ * ============================================================
+ */
 
-const id = parametros.get("id");
+const parametros =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const id =
+    parametros.get("id");
 
 
-document.getElementById("idIngresso").textContent =
-    id ? "ID: " + id : "ID não informado";
+document
+    .getElementById("idIngresso")
+    .textContent =
+        id
+            ? "ID: " + id
+            : "ID não informado";
 
+
+/*
+ * ============================================================
+ * VERIFICAR SE EXISTE ID
+ * ============================================================
+ */
 
 if (!id) {
 
-    document.getElementById("carregando").classList.add("hidden");
+    document
+        .getElementById("carregando")
+        .classList
+        .add("hidden");
 
-    document.getElementById("statusErro").classList.remove("hidden");
+    document
+        .getElementById("statusErro")
+        .classList
+        .remove("hidden");
 
 } else {
 
@@ -333,94 +416,225 @@ if (!id) {
 }
 
 
+/*
+ * ============================================================
+ * CONSULTAR INGRESSO
+ * ============================================================
+ */
+
 async function consultarIngresso() {
 
     try {
 
-        const resposta = await fetch(
-            API_URL + "?id=" + encodeURIComponent(id)
+        const resposta =
+            await fetch(
+                API_URL +
+                "?id=" +
+                encodeURIComponent(id)
+            );
+
+
+        const dados =
+            await resposta.json();
+
+
+        console.log(
+            "RESPOSTA DO SERVIDOR:",
+            dados
         );
 
-        const dados = await resposta.json();
+
+        /*
+         * ------------------------------------------------------
+         * PARAR CARREGAMENTO
+         * ------------------------------------------------------
+         */
+
+        document
+            .getElementById("carregando")
+            .classList
+            .add("hidden");
 
 
-        document.getElementById("carregando").classList.add("hidden");
-
+        /*
+         * ------------------------------------------------------
+         * INGRESSO NÃO ENCONTRADO
+         * ------------------------------------------------------
+         */
 
         if (!dados.sucesso) {
 
             document
                 .getElementById("statusErro")
-                .classList.remove("hidden");
+                .classList
+                .remove("hidden");
 
             return;
-
         }
 
 
         /*
+         * ------------------------------------------------------
          * PAGAMENTO PENDENTE
+         * ------------------------------------------------------
          */
 
-        if (dados.pagamento !== "Pago") {
+        if (
+            dados.pago !== true
+        ) {
 
             document
                 .getElementById("statusPendente")
-                .classList.remove("hidden");
+                .classList
+                .remove("hidden");
 
             return;
-
         }
 
 
         /*
+         * ------------------------------------------------------
          * PAGAMENTO CONFIRMADO
+         * ------------------------------------------------------
          */
 
         document
             .getElementById("statusPago")
-            .classList.remove("hidden");
-
-
-        document.getElementById("nome").textContent =
-            dados.nome;
-
-
-        document.getElementById("tipo").textContent =
-            dados.tipo === "masculino"
-                ? "Masculino"
-                : "Feminino";
-
-
-        document.getElementById("valor").textContent =
-            Number(dados.valor).toFixed(2).replace(".", ",");
+            .classList
+            .remove("hidden");
 
 
         /*
-         * GERA O QR CODE
+         * NOME
          */
 
+        document
+            .getElementById("nome")
+            .textContent =
+                dados.nome || "";
+
+
+        /*
+         * TIPO
+         */
+
+        document
+            .getElementById("tipo")
+            .textContent =
+                dados.tipo === "masculino"
+                    ? "Masculino"
+                    : "Feminino";
+
+
+        /*
+         * VALOR
+         */
+
+        document
+            .getElementById("valor")
+            .textContent =
+                Number(
+                    dados.valor
+                )
+                .toFixed(2)
+                .replace(
+                    ".",
+                    ","
+                );
+
+
+        /*
+         * ------------------------------------------------------
+         * DEFINIR CONTEÚDO DO QR CODE
+         * ------------------------------------------------------
+         *
+         * Primeiro tenta usar o qrCode salvo no banco.
+         *
+         * Se por algum motivo não existir,
+         * utiliza o ID do ingresso.
+         */
+
+        const codigoQR =
+            dados.qrCode ||
+            dados.id;
+
+
+        /*
+         * ------------------------------------------------------
+         * GERAR QR CODE
+         * ------------------------------------------------------
+         */
+
+        const elementoQR =
+            document
+                .getElementById(
+                    "qrcode"
+                );
+
+
+        elementoQR.innerHTML = "";
+
+
+        if (!codigoQR) {
+
+            elementoQR.innerHTML =
+                "<span style='color:#222'>" +
+                "QR Code indisponível." +
+                "</span>";
+
+            return;
+        }
+
+
         new QRCode(
-            document.getElementById("qrcode"),
+
+            elementoQR,
+
             {
-                text: dados.id,
-                width: 220,
-                height: 220
+
+                text:
+                    String(
+                        codigoQR
+                    ),
+
+                width:
+                    220,
+
+                height:
+                    220,
+
+                correctLevel:
+                    QRCode.CorrectLevel.H
+
             }
+
         );
+
+
+        console.log(
+            "QR CODE GERADO:",
+            codigoQR
+        );
+
 
     } catch (erro) {
 
-        console.error(erro);
+        console.error(
+            "ERRO:",
+            erro
+        );
+
 
         document
             .getElementById("carregando")
-            .classList.add("hidden");
+            .classList
+            .add("hidden");
+
 
         document
             .getElementById("statusErro")
-            .classList.remove("hidden");
-
+            .classList
+            .remove("hidden");
     }
 
 }
