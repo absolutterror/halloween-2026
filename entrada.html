@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Entrada - Halloween 2026</title>
+
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #080808;
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 5px;
+      font-size: 30px;
+    }
+
+    .subtitulo {
+      color: #aaa;
+      margin-bottom: 20px;
+    }
+
+    #reader {
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+      background: #111;
+      border-radius: 15px;
+      overflow: hidden;
+    }
+
+    .resultado {
+      display: none;
+      margin-top: 20px;
+      padding: 25px 20px;
+      border-radius: 15px;
+    }
+
+    .resultado h2 {
+      margin-top: 0;
+      font-size: 28px;
+    }
+
+    .resultado p {
+      margin: 8px 0;
+      font-size: 18px;
+    }
+
+    .sucesso {
+      display: block;
+      background: #123d1d;
+      border: 2px solid #2ecc71;
+    }
+
+    .erro {
+      display: block;
+      background: #451414;
+      border: 2px solid #ff4444;
+    }
+
+    button {
+      border: none;
+      border-radius: 10px;
+      padding: 14px 22px;
+      margin-top: 18px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      background: #ff6600;
+      color: white;
+    }
+
+    button:hover {
+      background: #ff7b22;
+    }
+
+    .carregando {
+      color: #aaa;
+      margin-top: 15px;
+      display: none;
+    }
+
+    .manual {
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px solid #333;
+    }
+
+    .manual input {
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid #555;
+      background: #111;
+      color: white;
+      font-size: 16px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>🎃 Entrada</h1>
+
+    <div class="subtitulo">
+      Halloween 2026
+    </div>
+
+    <div id="reader"></div>
+
+    <div id="carregando" class="carregando">
+      Validando ingresso...
+    </div>
+
+    <div id="resultado" class="resultado">
+      <h2 id="tituloResultado"></h2>
+
+      <p id="nomeResultado"></p>
+      <p id="tipoResultado"></p>
+      <p id="idResultado"></p>
+
+      <button onclick="novoScan()">
+        ESCANEAR PRÓXIMO
+      </button>
+    </div>
+
+    <div class="manual">
+
+      <p>Se necessário, digite o ID do ingresso:</p>
+
+      <input
+        type="text"
+        id="idManual"
+        placeholder="Ex: HW26-C28CEBFC"
+      >
+
+      <button onclick="validarManual()">
+        VALIDAR ID
+      </button>
+
+    </div>
+
+  </div>
+
+
+<script>
+
+const APPS_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycby47FKISxM1brTG5wvQcEY5LBJcWfv6RO8p4ku7dBFJxfFNZp98bBbvptXaXk5Xfrzr/exec";
+
+
+let scanner = null;
+let processando = false;
+
+
+/**
+ * ============================================================
+ * INICIAR SCANNER
+ * ============================================================
+ */
+
+function iniciarScanner() {
+
+  scanner = new Html5Qrcode("reader");
+
+  scanner.start(
+
+    {
+      facingMode: "environment"
+    },
+
+    {
+      fps: 10,
+      qrbox: {
+        width: 250,
+        height: 250
+      }
+    },
+
+    function(decodedText) {
+
+      if (processando) {
+        return;
+      }
+
+      processando = true;
+
+      validarIngresso(decodedText);
+
+    },
+
+    function(errorMessage) {
+
+      // Erros normais de leitura são ignorados.
+      // O scanner continua procurando o QR Code.
+
+    }
+
+  ).catch(function(error) {
+
+    mostrarErro(
+      "Não foi possível acessar a câmera."
+    );
+
+    console.error(error);
+
+  });
+
+}
+
+
+/**
+ * ============================================================
+ * VALIDAR INGRESSO
+ * ============================================================
+ */
+
+async function validarIngresso(id) {
+
+  id = String(id).trim();
+
+  if (!id) {
+
+    mostrarErro(
+      "QR Code inválido."
+    );
+
+    return;
+  }
+
+
+  document.getElementById(
+    "carregando"
+  ).style.display = "block";
+
+
+  try {
+
+    const url =
+      APPS_SCRIPT_URL +
+      "?acao=validarEntrada&id=" +
+      encodeURIComponent(id);
+
+
+    const resposta =
+      await fetch(url);
+
+
+    const dados =
+      await resposta.json();
+
+
+    document.getElementById(
+      "carregando"
+    ).style.display = "none";
+
+
+    mostrarResultado(
+      dados
+    );
+
+
+  } catch (erro) {
+
+    document.getElementById(
+      "carregando"
+    ).style.display = "none";
+
+
+    mostrarErro(
+      "Erro de comunicação com o servidor."
+    );
+
+
+    console.error(erro);
+
+  }
+
+}
+
+
+/**
+ * ============================================================
+ * MOSTRAR RESULTADO
+ * ============================================================
+ */
+
+function mostrarResultado(dados) {
+
+  const resultado =
+    document.getElementById(
+      "resultado"
+    );
+
+  const titulo =
+    document.getElementById(
+      "tituloResultado"
+    );
+
+  const nome =
+    document.getElementById(
+      "nomeResultado"
+    );
+
+  const tipo =
+    document.getElementById(
+      "tipoResultado"
+    );
+
+  const id =
+    document.getElementById(
+      "idResultado"
+    );
+
+
+  resultado.className =
+    "resultado";
+
+
+  nome.textContent = "";
+  tipo.textContent = "";
+  id.textContent = "";
+
+
+  if (
+    dados.liberado === true
+  ) {
+
+    resultado.classList.add(
+      "sucesso"
+    );
+
+
+    titulo.textContent =
+      "ENTRADA LIBERADA";
+
+
+    nome.textContent =
+      "Nome: " +
+      dados.nome;
+
+
+    tipo.textContent =
+      "Tipo: " +
+      formatarTipo(
+        dados.tipo
+      );
+
+
+    id.textContent =
+      "ID: " +
+      dados.id;
+
+  }
+
+  else {
+
+    resultado.classList.add(
+      "erro"
+    );
+
+
+    if (
+      dados.motivo ===
+      "JA_UTILIZADO"
+    ) {
+
+      titulo.textContent =
+        "INGRESSO JÁ UTILIZADO";
+
+    }
+
+    else if (
+      dados.motivo ===
+      "NAO_PAGO"
+    ) {
+
+      titulo.textContent =
+        "PAGAMENTO NÃO CONFIRMADO";
+
+    }
+
+    else if (
+      dados.motivo ===
+      "NAO_ENCONTRADO"
+    ) {
+
+      titulo.textContent =
+        "INGRESSO NÃO ENCONTRADO";
+
+    }
+
+    else {
+
+      titulo.textContent =
+        "ENTRADA NÃO LIBERADA";
+
+    }
+
+
+    if (dados.nome) {
+
+      nome.textContent =
+        "Nome: " +
+        dados.nome;
+
+    }
+
+
+    if (dados.tipo) {
+
+      tipo.textContent =
+        "Tipo: " +
+        formatarTipo(
+          dados.tipo
+        );
+
+    }
+
+
+    if (dados.id) {
+
+      id.textContent =
+        "ID: " +
+        dados.id;
+
+    }
+
+  }
+
+
+  resultado.style.display =
+    "block";
+
+
+  pararScanner();
+
+}
+
+
+/**
+ * ============================================================
+ * ERRO
+ * ============================================================
+ */
+
+function mostrarErro(mensagem) {
+
+  const resultado =
+    document.getElementById(
+      "resultado"
+    );
+
+  const titulo =
+    document.getElementById(
+      "tituloResultado"
+    );
+
+
+  resultado.className =
+    "resultado erro";
+
+
+  titulo.textContent =
+    mensagem;
+
+
+  document.getElementById(
+    "nomeResultado"
+  ).textContent = "";
+
+
+  document.getElementById(
+    "tipoResultado"
+  ).textContent = "";
+
+
+  document.getElementById(
+    "idResultado"
+  ).textContent = "";
+
+
+  resultado.style.display =
+    "block";
+
+
+  pararScanner();
+
+}
+
+
+/**
+ * ============================================================
+ * PARAR SCANNER
+ * ============================================================
+ */
+
+function pararScanner() {
+
+  if (!scanner) {
+    return;
+  }
+
+
+  scanner.stop()
+    .then(function() {
+
+      console.log(
+        "Scanner parado."
+      );
+
+    })
+    .catch(function(error) {
+
+      console.log(
+        "Scanner já estava parado.",
+        error
+      );
+
+    });
+
+}
+
+
+/**
+ * ============================================================
+ * NOVO SCAN
+ * ============================================================
+ */
+
+function novoScan() {
+
+  const resultado =
+    document.getElementById(
+      "resultado"
+    );
+
+
+  resultado.style.display =
+    "none";
+
+
+  document.getElementById(
+    "carregando"
+  ).style.display =
+    "none";
+
+
+  processando = false;
+
+
+  if (scanner) {
+
+    scanner.clear()
+      .then(function() {
+
+        iniciarScanner();
+
+      })
+      .catch(function() {
+
+        iniciarScanner();
+
+      });
+
+  }
+
+  else {
+
+    iniciarScanner();
+
+  }
+
+}
+
+
+/**
+ * ============================================================
+ * VALIDAÇÃO MANUAL
+ * ============================================================
+ */
+
+function validarManual() {
+
+  const campo =
+    document.getElementById(
+      "idManual"
+    );
+
+
+  const id =
+    campo.value.trim();
+
+
+  if (!id) {
+
+    mostrarErro(
+      "Digite o ID do ingresso."
+    );
+
+    return;
+  }
+
+
+  processando = true;
+
+  validarIngresso(id);
+
+}
+
+
+/**
+ * ============================================================
+ * FORMATAR TIPO
+ * ============================================================
+ */
+
+function formatarTipo(tipo) {
+
+  tipo =
+    String(tipo || "")
+      .toLowerCase();
+
+
+  if (
+    tipo === "masculino"
+  ) {
+
+    return "Masculino";
+
+  }
+
+
+  if (
+    tipo === "feminino"
+  ) {
+
+    return "Feminino";
+
+  }
+
+
+  return tipo;
+
+}
+
+
+/**
+ * ============================================================
+ * INICIAR
+ * ============================================================
+ */
+
+window.onload =
+  function() {
+
+    iniciarScanner();
+
+  };
+
+</script>
+
+</body>
+</html>
