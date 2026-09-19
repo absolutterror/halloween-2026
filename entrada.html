@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Entrada - Halloween 2026</title>
+  <title>Controle de Entrada - Halloween 2026</title>
 
   <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 
@@ -13,159 +13,662 @@
       box-sizing: border-box;
     }
 
+    :root {
+      --laranja: #ff7100;
+      --laranja-claro: #ff9d32;
+      --verde: #20ff57;
+      --vermelho: #ff3030;
+      --fundo: #050505;
+      --painel: #0c0c0c;
+      --borda: #27333a;
+      --texto: #f5f5f5;
+      --cinza: #9ca8ad;
+    }
+
     body {
       margin: 0;
       min-height: 100vh;
-      background: #080808;
-      color: white;
+      background:
+        radial-gradient(circle at 50% 0%, #281200 0%, transparent 32%),
+        radial-gradient(circle at 10% 90%, #1c0800 0%, transparent 25%),
+        radial-gradient(circle at 90% 90%, #1c0800 0%, transparent 25%),
+        var(--fundo);
+
+      color: var(--texto);
       font-family: Arial, Helvetica, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "🕷";
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      font-size: 55px;
+      opacity: 0.15;
+      pointer-events: none;
+    }
+
+    body::after {
+      content: "🕸";
+      position: fixed;
+      top: 0;
+      right: 0;
+      font-size: 100px;
+      opacity: 0.12;
+      pointer-events: none;
     }
 
     .container {
       width: 100%;
-      max-width: 500px;
+      max-width: 650px;
+      margin: 0 auto;
+      padding: 25px 16px 35px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ======================================================
+       CABEÇALHO
+    ====================================================== */
+
+    .header {
       text-align: center;
+      margin-bottom: 25px;
     }
 
-    h1 {
-      margin-bottom: 5px;
-      font-size: 30px;
+    .pumpkin {
+      font-size: 48px;
+      line-height: 1;
+      margin-bottom: 8px;
+      filter: drop-shadow(0 0 12px rgba(255, 113, 0, 0.5));
     }
 
-    .subtitulo {
-      color: #aaa;
-      margin-bottom: 20px;
+    .titulo {
+      margin: 0;
+      color: var(--laranja);
+      font-size: clamp(32px, 9vw, 54px);
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-shadow:
+        0 0 8px rgba(255, 113, 0, 0.5),
+        0 0 25px rgba(255, 113, 0, 0.25);
+    }
+
+    .ano {
+      margin-top: -4px;
+      color: white;
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: 8px;
+    }
+
+    .linha-titulo {
+      width: 80px;
+      height: 3px;
+      background: var(--laranja);
+      margin: 12px auto;
+      box-shadow: 0 0 10px rgba(255, 113, 0, 0.7);
+    }
+
+    .controle {
+      margin: 0;
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .equipe {
+      color: var(--laranja);
+      margin-top: 7px;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 4px;
+    }
+
+    /* ======================================================
+       PAINEL SCANNER
+    ====================================================== */
+
+    .scanner-card {
+      background: rgba(10, 10, 10, 0.96);
+      border: 1px solid #31505a;
+      border-radius: 22px;
+      padding: 15px;
+      box-shadow:
+        0 0 30px rgba(0, 0, 0, 0.7),
+        inset 0 0 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .scanner-title {
+      text-align: center;
+      margin: 5px 0 15px;
+      color: var(--cinza);
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
     }
 
     #reader {
       width: 100%;
-      max-width: 420px;
+      max-width: 500px;
       margin: 0 auto;
-      background: #111;
-      border-radius: 15px;
+      overflow: hidden;
+      border-radius: 16px;
+    }
+
+    #reader video {
+      border-radius: 16px;
+    }
+
+    #reader__dashboard {
+      padding: 8px !important;
+    }
+
+    #reader__dashboard button {
+      background: var(--laranja) !important;
+      color: white !important;
+      border: none !important;
+      border-radius: 8px !important;
+      padding: 10px 14px !important;
+      font-weight: bold !important;
+    }
+
+    #reader__dashboard select {
+      background: #111 !important;
+      color: white !important;
+      border: 1px solid #555 !important;
+      padding: 8px !important;
+      border-radius: 7px !important;
+    }
+
+    #reader__scan_region {
+      border-radius: 16px;
       overflow: hidden;
     }
+
+    .scanner-instrucao {
+      text-align: center;
+      color: #aeb9bd;
+      margin: 15px 0 5px;
+      font-size: 15px;
+    }
+
+    /* ======================================================
+       CARREGANDO
+    ====================================================== */
+
+    .carregando {
+      display: none;
+      text-align: center;
+      margin: 18px 0;
+      color: var(--laranja-claro);
+      font-weight: bold;
+      animation: pulsar 1s infinite;
+    }
+
+    @keyframes pulsar {
+      50% {
+        opacity: 0.45;
+      }
+    }
+
+    /* ======================================================
+       RESULTADO
+    ====================================================== */
 
     .resultado {
       display: none;
       margin-top: 20px;
+      border-radius: 22px;
       padding: 25px 20px;
-      border-radius: 15px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .resultado::after {
+      content: "🎃";
+      position: absolute;
+      right: -10px;
+      bottom: -20px;
+      font-size: 130px;
+      opacity: 0.10;
+      pointer-events: none;
+    }
+
+    .resultado.sucesso {
+      background:
+        radial-gradient(circle at 80% 20%, rgba(32, 255, 87, 0.13), transparent 35%),
+        #061109;
+
+      border: 2px solid var(--verde);
+
+      box-shadow:
+        0 0 20px rgba(32, 255, 87, 0.25),
+        inset 0 0 35px rgba(32, 255, 87, 0.04);
+    }
+
+    .resultado.erro {
+      background:
+        radial-gradient(circle at 80% 20%, rgba(255, 48, 48, 0.15), transparent 35%),
+        #160606;
+
+      border: 2px solid var(--vermelho);
+
+      box-shadow:
+        0 0 20px rgba(255, 48, 48, 0.22),
+        inset 0 0 35px rgba(255, 48, 48, 0.04);
+    }
+
+    .icone-resultado {
+      font-size: 65px;
+      line-height: 1;
+      margin-bottom: 10px;
     }
 
     .resultado h2 {
-      margin-top: 0;
-      font-size: 28px;
+      margin: 0 0 22px;
+      font-size: clamp(28px, 8vw, 44px);
+      font-weight: 900;
+      letter-spacing: 1px;
     }
 
-    .resultado p {
-      margin: 8px 0;
-      font-size: 18px;
+    .sucesso h2 {
+      color: var(--verde);
+      text-shadow: 0 0 15px rgba(32, 255, 87, 0.35);
     }
 
-    .sucesso {
-      display: block;
-      background: #123d1d;
-      border: 2px solid #2ecc71;
+    .erro h2 {
+      color: #ff4545;
+      text-shadow: 0 0 15px rgba(255, 48, 48, 0.35);
     }
 
-    .erro {
-      display: block;
-      background: #451414;
-      border: 2px solid #ff4444;
-    }
-
-    button {
-      border: none;
-      border-radius: 10px;
-      padding: 14px 22px;
-      margin-top: 18px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      background: #ff6600;
-      color: white;
-    }
-
-    button:hover {
-      background: #ff7b22;
-    }
-
-    .carregando {
-      color: #aaa;
-      margin-top: 15px;
+    .mensagem-boas-vindas {
       display: none;
+      color: var(--verde);
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 4px;
+      margin-top: -12px;
+      margin-bottom: 20px;
     }
+
+    .dados {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 15px;
+      padding: 5px 15px;
+      text-align: left;
+    }
+
+    .dado {
+      padding: 14px 4px;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .dado:last-child {
+      border-bottom: none;
+    }
+
+    .dado-label {
+      display: block;
+      color: #8f9ca1;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .dado-valor {
+      display: block;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      word-break: break-word;
+    }
+
+    /* ======================================================
+       BOTÃO
+    ====================================================== */
+
+    .botao {
+      width: 100%;
+      border: none;
+      border-radius: 13px;
+      padding: 17px;
+      margin-top: 20px;
+      background: linear-gradient(
+        135deg,
+        var(--laranja),
+        #ff8d18
+      );
+      color: #080808;
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow:
+        0 5px 20px rgba(255, 113, 0, 0.25);
+      transition: 0.2s;
+    }
+
+    .botao:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 8px 25px rgba(255, 113, 0, 0.4);
+    }
+
+    .botao:active {
+      transform: scale(0.98);
+    }
+
+    /* ======================================================
+       VALIDAÇÃO MANUAL
+    ====================================================== */
 
     .manual {
-      margin-top: 25px;
-      padding-top: 20px;
-      border-top: 1px solid #333;
+      margin-top: 22px;
+      background: rgba(10, 10, 10, 0.95);
+      border: 1px solid #27343a;
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .manual-titulo {
+      margin: 0 0 12px;
+      color: #aeb9bd;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .manual-area {
+      display: flex;
+      gap: 10px;
     }
 
     .manual input {
-      width: 100%;
+      min-width: 0;
+      flex: 1;
       padding: 14px;
       border-radius: 10px;
-      border: 1px solid #555;
-      background: #111;
+      border: 1px solid #45545b;
+      background: #080808;
       color: white;
-      font-size: 16px;
+      font-size: 15px;
       text-align: center;
       text-transform: uppercase;
+      outline: none;
+    }
+
+    .manual input:focus {
+      border-color: var(--laranja);
+      box-shadow: 0 0 10px rgba(255, 113, 0, 0.15);
+    }
+
+    .botao-manual {
+      border: 1px solid var(--laranja);
+      border-radius: 10px;
+      background: transparent;
+      color: var(--laranja);
+      padding: 0 18px;
+      font-weight: bold;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .botao-manual:hover {
+      background: var(--laranja);
+      color: #080808;
+    }
+
+    /* ======================================================
+       RODAPÉ
+    ====================================================== */
+
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      color: #69757a;
+      font-size: 11px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+    }
+
+    .footer-linha {
+      width: 90px;
+      height: 1px;
+      background: var(--laranja);
+      margin: 0 auto 12px;
+      opacity: 0.7;
+    }
+
+    /* ======================================================
+       CELULAR
+    ====================================================== */
+
+    @media (max-width: 500px) {
+
+      .container {
+        padding: 18px 12px 25px;
+      }
+
+      .titulo {
+        font-size: 35px;
+      }
+
+      .controle {
+        font-size: 17px;
+      }
+
+      .equipe {
+        font-size: 10px;
+        letter-spacing: 3px;
+      }
+
+      .scanner-card {
+        padding: 10px;
+      }
+
+      .resultado {
+        padding: 22px 15px;
+      }
+
+      .manual-area {
+        flex-direction: column;
+      }
+
+      .botao-manual {
+        min-height: 48px;
+      }
+
+      .dado-valor {
+        font-size: 18px;
+      }
     }
   </style>
 </head>
 
+
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <h1>🎃 Entrada</h1>
+  <!-- ======================================================
+       CABEÇALHO
+  ======================================================= -->
 
-    <div class="subtitulo">
-      Halloween 2026
+  <header class="header">
+
+    <div class="pumpkin">🎃</div>
+
+    <h1 class="titulo">
+      Halloween
+    </h1>
+
+    <div class="ano">
+      2026
+    </div>
+
+    <div class="linha-titulo"></div>
+
+    <h2 class="controle">
+      Controle de Entrada
+    </h2>
+
+    <div class="equipe">
+      EQUIPE DE SEGURANÇA
+    </div>
+
+  </header>
+
+
+  <!-- ======================================================
+       SCANNER
+  ======================================================= -->
+
+  <section class="scanner-card">
+
+    <div class="scanner-title">
+      Leitor de ingresso
     </div>
 
     <div id="reader"></div>
 
-    <div id="carregando" class="carregando">
-      Validando ingresso...
+    <div class="scanner-instrucao">
+      Aponte o QR Code para a câmera
     </div>
 
-    <div id="resultado" class="resultado">
-      <h2 id="tituloResultado"></h2>
+  </section>
 
-      <p id="nomeResultado"></p>
-      <p id="tipoResultado"></p>
-      <p id="idResultado"></p>
 
-      <button onclick="novoScan()">
-        ESCANEAR PRÓXIMO
-      </button>
+  <!-- ======================================================
+       CARREGANDO
+  ======================================================= -->
+
+  <div id="carregando" class="carregando">
+    VALIDANDO INGRESSO...
+  </div>
+
+
+  <!-- ======================================================
+       RESULTADO
+  ======================================================= -->
+
+  <section id="resultado" class="resultado">
+
+    <div id="iconeResultado" class="icone-resultado">
+      ✓
     </div>
 
-    <div class="manual">
+    <h2 id="tituloResultado"></h2>
 
-      <p>Se necessário, digite o ID do ingresso:</p>
+    <div
+      id="mensagemBoasVindas"
+      class="mensagem-boas-vindas">
+      BEM-VINDO(A) À FESTA!
+    </div>
+
+
+    <div class="dados">
+
+      <div class="dado">
+        <span class="dado-label">
+          Nome
+        </span>
+
+        <span
+          id="nomeResultado"
+          class="dado-valor">
+        </span>
+      </div>
+
+
+      <div class="dado">
+        <span class="dado-label">
+          Tipo
+        </span>
+
+        <span
+          id="tipoResultado"
+          class="dado-valor">
+        </span>
+      </div>
+
+
+      <div class="dado">
+        <span class="dado-label">
+          ID do ingresso
+        </span>
+
+        <span
+          id="idResultado"
+          class="dado-valor">
+        </span>
+      </div>
+
+    </div>
+
+
+    <button
+      class="botao"
+      onclick="novoScan()">
+
+      ↻ &nbsp; ESCANEAR PRÓXIMO
+
+    </button>
+
+  </section>
+
+
+  <!-- ======================================================
+       VALIDAÇÃO MANUAL
+  ======================================================= -->
+
+  <section class="manual">
+
+    <p class="manual-titulo">
+      ⌨️ Validação manual
+    </p>
+
+    <div class="manual-area">
 
       <input
         type="text"
         id="idManual"
-        placeholder="Ex: HW26-C28CEBFC"
+        placeholder="HW26-C28CEBFC"
+        autocomplete="off"
       >
 
-      <button onclick="validarManual()">
-        VALIDAR ID
+      <button
+        class="botao-manual"
+        onclick="validarManual()">
+
+        VALIDAR
+
       </button>
 
     </div>
 
-  </div>
+  </section>
+
+
+  <!-- ======================================================
+       RODAPÉ
+  ======================================================= -->
+
+  <footer class="footer">
+
+    <div class="footer-linha"></div>
+
+    HALLOWEEN 2026
+
+  </footer>
+
+</div>
 
 
 <script>
@@ -178,15 +681,15 @@ let scanner = null;
 let processando = false;
 
 
-/**
- * ============================================================
- * INICIAR SCANNER
- * ============================================================
- */
+/* ============================================================
+   INICIAR SCANNER
+============================================================ */
 
 function iniciarScanner() {
 
-  scanner = new Html5Qrcode("reader");
+  scanner =
+    new Html5Qrcode("reader");
+
 
   scanner.start(
 
@@ -196,6 +699,7 @@ function iniciarScanner() {
 
     {
       fps: 10,
+
       qrbox: {
         width: 250,
         height: 250
@@ -217,14 +721,13 @@ function iniciarScanner() {
     function(errorMessage) {
 
       // Erros normais de leitura são ignorados.
-      // O scanner continua procurando o QR Code.
 
     }
 
   ).catch(function(error) {
 
     mostrarErro(
-      "Não foi possível acessar a câmera."
+      "NÃO FOI POSSÍVEL ACESSAR A CÂMERA"
     );
 
     console.error(error);
@@ -234,20 +737,20 @@ function iniciarScanner() {
 }
 
 
-/**
- * ============================================================
- * VALIDAR INGRESSO
- * ============================================================
- */
+/* ============================================================
+   VALIDAR INGRESSO
+============================================================ */
 
 async function validarIngresso(id) {
 
-  id = String(id).trim();
+  id =
+    String(id).trim();
+
 
   if (!id) {
 
     mostrarErro(
-      "QR Code inválido."
+      "QR CODE INVÁLIDO"
     );
 
     return;
@@ -280,12 +783,11 @@ async function validarIngresso(id) {
     ).style.display = "none";
 
 
-    mostrarResultado(
-      dados
-    );
+    mostrarResultado(dados);
 
+  }
 
-  } catch (erro) {
+  catch (erro) {
 
     document.getElementById(
       "carregando"
@@ -293,7 +795,7 @@ async function validarIngresso(id) {
 
 
     mostrarErro(
-      "Erro de comunicação com o servidor."
+      "ERRO DE COMUNICAÇÃO COM O SERVIDOR"
     );
 
 
@@ -304,11 +806,9 @@ async function validarIngresso(id) {
 }
 
 
-/**
- * ============================================================
- * MOSTRAR RESULTADO
- * ============================================================
- */
+/* ============================================================
+   MOSTRAR RESULTADO
+============================================================ */
 
 function mostrarResultado(dados) {
 
@@ -317,24 +817,40 @@ function mostrarResultado(dados) {
       "resultado"
     );
 
+
   const titulo =
     document.getElementById(
       "tituloResultado"
     );
+
 
   const nome =
     document.getElementById(
       "nomeResultado"
     );
 
+
   const tipo =
     document.getElementById(
       "tipoResultado"
     );
 
+
   const id =
     document.getElementById(
       "idResultado"
+    );
+
+
+  const icone =
+    document.getElementById(
+      "iconeResultado"
+    );
+
+
+  const boasVindas =
+    document.getElementById(
+      "mensagemBoasVindas"
     );
 
 
@@ -347,6 +863,14 @@ function mostrarResultado(dados) {
   id.textContent = "";
 
 
+  boasVindas.style.display =
+    "none";
+
+
+  /* ==========================================================
+     ENTRADA LIBERADA
+  ========================================================== */
+
   if (
     dados.liberado === true
   ) {
@@ -356,33 +880,47 @@ function mostrarResultado(dados) {
     );
 
 
+    icone.textContent =
+      "✓";
+
+
     titulo.textContent =
       "ENTRADA LIBERADA";
 
 
+    boasVindas.style.display =
+      "block";
+
+
     nome.textContent =
-      "Nome: " +
-      dados.nome;
+      dados.nome || "-";
 
 
     tipo.textContent =
-      "Tipo: " +
       formatarTipo(
         dados.tipo
       );
 
 
     id.textContent =
-      "ID: " +
-      dados.id;
+      dados.id || "-";
 
   }
+
+
+  /* ==========================================================
+     ENTRADA NEGADA
+  ========================================================== */
 
   else {
 
     resultado.classList.add(
       "erro"
     );
+
+
+    icone.textContent =
+      "✕";
 
 
     if (
@@ -426,7 +964,6 @@ function mostrarResultado(dados) {
     if (dados.nome) {
 
       nome.textContent =
-        "Nome: " +
         dados.nome;
 
     }
@@ -435,7 +972,6 @@ function mostrarResultado(dados) {
     if (dados.tipo) {
 
       tipo.textContent =
-        "Tipo: " +
         formatarTipo(
           dados.tipo
         );
@@ -446,7 +982,6 @@ function mostrarResultado(dados) {
     if (dados.id) {
 
       id.textContent =
-        "ID: " +
         dados.id;
 
     }
@@ -463,11 +998,9 @@ function mostrarResultado(dados) {
 }
 
 
-/**
- * ============================================================
- * ERRO
- * ============================================================
- */
+/* ============================================================
+   MOSTRAR ERRO
+============================================================ */
 
 function mostrarErro(mensagem) {
 
@@ -476,14 +1009,31 @@ function mostrarErro(mensagem) {
       "resultado"
     );
 
+
   const titulo =
     document.getElementById(
       "tituloResultado"
     );
 
 
+  const icone =
+    document.getElementById(
+      "iconeResultado"
+    );
+
+
+  const boasVindas =
+    document.getElementById(
+      "mensagemBoasVindas"
+    );
+
+
   resultado.className =
     "resultado erro";
+
+
+  icone.textContent =
+    "✕";
 
 
   titulo.textContent =
@@ -505,6 +1055,10 @@ function mostrarErro(mensagem) {
   ).textContent = "";
 
 
+  boasVindas.style.display =
+    "none";
+
+
   resultado.style.display =
     "block";
 
@@ -514,11 +1068,9 @@ function mostrarErro(mensagem) {
 }
 
 
-/**
- * ============================================================
- * PARAR SCANNER
- * ============================================================
- */
+/* ============================================================
+   PARAR SCANNER
+============================================================ */
 
 function pararScanner() {
 
@@ -547,11 +1099,9 @@ function pararScanner() {
 }
 
 
-/**
- * ============================================================
- * NOVO SCAN
- * ============================================================
- */
+/* ============================================================
+   NOVO SCAN
+============================================================ */
 
 function novoScan() {
 
@@ -569,6 +1119,11 @@ function novoScan() {
     "carregando"
   ).style.display =
     "none";
+
+
+  document.getElementById(
+    "idManual"
+  ).value = "";
 
 
   processando = false;
@@ -599,11 +1154,9 @@ function novoScan() {
 }
 
 
-/**
- * ============================================================
- * VALIDAÇÃO MANUAL
- * ============================================================
- */
+/* ============================================================
+   VALIDAÇÃO MANUAL
+============================================================ */
 
 function validarManual() {
 
@@ -620,9 +1173,14 @@ function validarManual() {
   if (!id) {
 
     mostrarErro(
-      "Digite o ID do ingresso."
+      "DIGITE O ID DO INGRESSO"
     );
 
+    return;
+  }
+
+
+  if (processando) {
     return;
   }
 
@@ -634,11 +1192,9 @@ function validarManual() {
 }
 
 
-/**
- * ============================================================
- * FORMATAR TIPO
- * ============================================================
- */
+/* ============================================================
+   FORMATAR TIPO
+============================================================ */
 
 function formatarTipo(tipo) {
 
@@ -665,16 +1221,36 @@ function formatarTipo(tipo) {
   }
 
 
-  return tipo;
+  return tipo || "-";
 
 }
 
 
-/**
- * ============================================================
- * INICIAR
- * ============================================================
- */
+/* ============================================================
+   ENTER NO CAMPO MANUAL
+============================================================ */
+
+document.getElementById(
+  "idManual"
+).addEventListener(
+  "keydown",
+  function(event) {
+
+    if (
+      event.key === "Enter"
+    ) {
+
+      validarManual();
+
+    }
+
+  }
+);
+
+
+/* ============================================================
+   INICIAR
+============================================================ */
 
 window.onload =
   function() {
