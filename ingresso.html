@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 
 <head>
@@ -18,11 +19,8 @@
 }
 
 body {
-
     margin: 0;
-
     min-height: 100vh;
-
     font-family: Arial, Helvetica, sans-serif;
 
     background:
@@ -36,24 +34,19 @@ body {
     color: white;
 
     display: flex;
-
     justify-content: center;
-
     align-items: center;
 
     padding: 20px;
 }
 
 .container {
-
     width: 100%;
-
     max-width: 430px;
 
     background: rgba(15, 15, 15, 0.95);
 
     border: 1px solid #ff6a00;
-
     border-radius: 18px;
 
     padding: 30px 22px;
@@ -65,32 +58,23 @@ body {
 }
 
 h1 {
-
     margin-top: 0;
-
     color: #ff6a00;
-
     font-size: 28px;
 }
 
 h2 {
-
     font-size: 20px;
-
     margin-bottom: 8px;
 }
 
 .info {
-
     color: #ccc;
-
     font-size: 14px;
-
     line-height: 1.6;
 }
 
 .id {
-
     display: inline-block;
 
     margin: 15px 0;
@@ -111,7 +95,6 @@ h2 {
 }
 
 .status {
-
     margin-top: 20px;
 
     padding: 15px;
@@ -124,69 +107,54 @@ h2 {
 }
 
 .pendente {
-
     background: #2a1d00;
-
     border: 1px solid #ffb000;
-
     color: #ffd36a;
 }
 
 .pago {
-
     background: #092411;
-
     border: 1px solid #25c45a;
-
     color: #7dff9f;
 }
 
 .erro {
-
     background: #2a0808;
-
     border: 1px solid #ff3333;
-
     color: #ff8c8c;
 }
 
 #qrcode {
-
     margin: 25px auto;
 
     padding: 15px;
 
     background: white;
 
-    width: fit-content;
+    width: 250px;
+    height: 250px;
 
     border-radius: 10px;
-
-    min-height: 250px;
 
     display: flex;
 
     justify-content: center;
-
     align-items: center;
 }
 
-#qrcode img {
-
+#qrcode img,
+#qrcode canvas {
     display: block;
 
-    width: 220px;
-
-    height: 220px;
+    width: 220px !important;
+    height: 220px !important;
 }
 
 .hidden {
-
     display: none;
 }
 
 .detalhes {
-
     margin-top: 20px;
 
     text-align: left;
@@ -201,33 +169,31 @@ h2 {
 }
 
 .detalhes p {
-
     margin: 8px 0;
-
     font-size: 14px;
 }
 
 .detalhes strong {
-
     color: #ff8c33;
 }
 
 .carregando {
-
     color: #ccc;
-
     margin-top: 20px;
 }
 
 .aviso-qr {
-
     color: #aaa;
-
     font-size: 12px;
-
     margin-top: -15px;
-
     line-height: 1.5;
+}
+
+.qr-titulo {
+    color: #ff8c33;
+    font-weight: bold;
+    margin-top: 25px;
+    margin-bottom: -10px;
 }
 
 </style>
@@ -238,129 +204,125 @@ h2 {
 
 <div class="container">
 
-    <h1>🎃 HALLOWEEN 2026</h1>
+```
+<h1>🎃 HALLOWEEN 2026</h1>
 
-    <h2>MEU INGRESSO</h2>
+<h2>MEU INGRESSO</h2>
 
-    <div class="info">
+<div class="info">
 
-        31 de Outubro de 2026<br>
+    31 de Outubro de 2026<br>
 
-        Rua Nigeria, 346 — Outeiro de Passargada<br>
+    Rua Nigeria, 346 — Outeiro de Passargada<br>
 
-        06719-630
-
-    </div>
-
-
-    <div class="id" id="idIngresso">
-
-        Carregando...
-
-    </div>
-
-
-    <div id="carregando" class="carregando">
-
-        Consultando seu ingresso...
-
-    </div>
-
-
-    <!-- PAGAMENTO PENDENTE -->
-
-    <div
-        id="statusPendente"
-        class="status pendente hidden"
-    >
-
-        ⏳ <strong>Pagamento pendente</strong>
-
-        <br><br>
-
-        Seu pagamento ainda não foi confirmado.
-
-        <br><br>
-
-        O QR Code será liberado após a confirmação do pagamento.
-
-    </div>
-
-
-    <!-- PAGAMENTO PAGO -->
-
-    <div
-        id="statusPago"
-        class="hidden"
-    >
-
-        <div class="status pago">
-
-            ✅ <strong>Pagamento confirmado!</strong>
-
-            <br><br>
-
-            Seu ingresso está liberado.
-
-        </div>
-
-
-        <div class="detalhes">
-
-            <p>
-                <strong>Nome:</strong>
-                <span id="nome"></span>
-            </p>
-
-            <p>
-                <strong>Tipo:</strong>
-                <span id="tipo"></span>
-            </p>
-
-            <p>
-                <strong>Valor:</strong>
-                R$ <span id="valor"></span>
-            </p>
-
-        </div>
-
-
-        <p class="info">
-
-            Apresente este QR Code na entrada do evento.
-
-        </p>
-
-
-        <div id="qrcode"></div>
-
-
-        <p class="aviso-qr">
-
-            Este QR Code é exclusivo deste ingresso.
-
-        </p>
-
-    </div>
-
-
-    <!-- ERRO -->
-
-    <div
-        id="statusErro"
-        class="status erro hidden"
-    >
-
-        ❌ <strong>Ingresso não encontrado</strong>
-
-        <br><br>
-
-        Verifique se o link do ingresso está correto.
-
-    </div>
+    06719-630
 
 </div>
 
+<div class="id" id="idIngresso">
+    Carregando...
+</div>
+
+<div id="carregando" class="carregando">
+    Consultando seu ingresso...
+</div>
+
+
+<!-- PAGAMENTO PENDENTE -->
+
+<div
+    id="statusPendente"
+    class="status pendente hidden"
+>
+
+    ⏳ <strong>Pagamento pendente</strong>
+
+    <br><br>
+
+    Seu pagamento ainda não foi confirmado.
+
+    <br><br>
+
+    O QR Code será liberado após a confirmação do pagamento.
+
+</div>
+
+
+<!-- PAGAMENTO PAGO -->
+
+<div
+    id="statusPago"
+    class="hidden"
+>
+
+    <div class="status pago">
+
+        ✅ <strong>Pagamento confirmado!</strong>
+
+        <br><br>
+
+        Seu ingresso está liberado.
+
+    </div>
+
+
+    <div class="detalhes">
+
+        <p>
+            <strong>Nome:</strong>
+            <span id="nome"></span>
+        </p>
+
+        <p>
+            <strong>Tipo:</strong>
+            <span id="tipo"></span>
+        </p>
+
+        <p>
+            <strong>Valor:</strong>
+            R$ <span id="valor"></span>
+        </p>
+
+    </div>
+
+
+    <p class="info">
+        Apresente este QR Code na entrada do evento.
+    </p>
+
+
+    <div class="qr-titulo">
+        QR CODE DO INGRESSO
+    </div>
+
+
+    <div id="qrcode"></div>
+
+
+    <p class="aviso-qr">
+        Este QR Code é exclusivo deste ingresso.
+    </p>
+
+</div>
+
+
+<!-- ERRO -->
+
+<div
+    id="statusErro"
+    class="status erro hidden"
+>
+
+    ❌ <strong>Ingresso não encontrado</strong>
+
+    <br><br>
+
+    Verifique se o link do ingresso está correto.
+
+</div>
+```
+
+</div>
 
 <script>
 
@@ -369,10 +331,10 @@ const API_URL =
 
 
 /*
- * ============================================================
- * PEGAR ID DA URL
- * ============================================================
- */
+============================================================
+PEGAR ID DA URL
+============================================================
+*/
 
 const parametros =
     new URLSearchParams(
@@ -392,10 +354,10 @@ document
 
 
 /*
- * ============================================================
- * VERIFICAR SE EXISTE ID
- * ============================================================
- */
+============================================================
+VERIFICAR ID
+============================================================
+*/
 
 if (!id) {
 
@@ -417,10 +379,10 @@ if (!id) {
 
 
 /*
- * ============================================================
- * CONSULTAR INGRESSO
- * ============================================================
- */
+============================================================
+CONSULTAR INGRESSO
+============================================================
+*/
 
 async function consultarIngresso() {
 
@@ -430,8 +392,20 @@ async function consultarIngresso() {
             await fetch(
                 API_URL +
                 "?id=" +
-                encodeURIComponent(id)
+                encodeURIComponent(id) +
+                "&t=" +
+                Date.now()
             );
+
+
+        if (!resposta.ok) {
+
+            throw new Error(
+                "Erro HTTP: " +
+                resposta.status
+            );
+
+        }
 
 
         const dados =
@@ -445,10 +419,10 @@ async function consultarIngresso() {
 
 
         /*
-         * ------------------------------------------------------
-         * PARAR CARREGAMENTO
-         * ------------------------------------------------------
-         */
+        --------------------------------------------------------
+        PARAR CARREGAMENTO
+        --------------------------------------------------------
+        */
 
         document
             .getElementById("carregando")
@@ -457,10 +431,10 @@ async function consultarIngresso() {
 
 
         /*
-         * ------------------------------------------------------
-         * INGRESSO NÃO ENCONTRADO
-         * ------------------------------------------------------
-         */
+        --------------------------------------------------------
+        INGRESSO NÃO ENCONTRADO
+        --------------------------------------------------------
+        */
 
         if (!dados.sucesso) {
 
@@ -474,10 +448,10 @@ async function consultarIngresso() {
 
 
         /*
-         * ------------------------------------------------------
-         * PAGAMENTO PENDENTE
-         * ------------------------------------------------------
-         */
+        --------------------------------------------------------
+        PAGAMENTO PENDENTE
+        --------------------------------------------------------
+        */
 
         if (
             dados.pago !== true
@@ -493,10 +467,10 @@ async function consultarIngresso() {
 
 
         /*
-         * ------------------------------------------------------
-         * PAGAMENTO CONFIRMADO
-         * ------------------------------------------------------
-         */
+        --------------------------------------------------------
+        PAGAMENTO CONFIRMADO
+        --------------------------------------------------------
+        */
 
         document
             .getElementById("statusPago")
@@ -505,8 +479,10 @@ async function consultarIngresso() {
 
 
         /*
-         * NOME
-         */
+        --------------------------------------------------------
+        NOME
+        --------------------------------------------------------
+        */
 
         document
             .getElementById("nome")
@@ -515,8 +491,10 @@ async function consultarIngresso() {
 
 
         /*
-         * TIPO
-         */
+        --------------------------------------------------------
+        TIPO
+        --------------------------------------------------------
+        */
 
         document
             .getElementById("tipo")
@@ -527,8 +505,10 @@ async function consultarIngresso() {
 
 
         /*
-         * VALOR
-         */
+        --------------------------------------------------------
+        VALOR
+        --------------------------------------------------------
+        */
 
         document
             .getElementById("valor")
@@ -544,41 +524,41 @@ async function consultarIngresso() {
 
 
         /*
-         * ------------------------------------------------------
-         * DEFINIR CONTEÚDO DO QR CODE
-         * ------------------------------------------------------
-         *
-         * Primeiro tenta usar o qrCode salvo no banco.
-         *
-         * Se por algum motivo não existir,
-         * utiliza o ID do ingresso.
-         */
+        ========================================================
+        QR CODE
+        ========================================================
+        */
 
         const codigoQR =
             dados.qrCode ||
             dados.id;
 
 
-        /*
-         * ------------------------------------------------------
-         * GERAR QR CODE
-         * ------------------------------------------------------
-         */
+        console.log(
+            "CÓDIGO DO QR:",
+            codigoQR
+        );
+
 
         const elementoQR =
-            document
-                .getElementById(
-                    "qrcode"
-                );
+            document.getElementById(
+                "qrcode"
+            );
 
 
         elementoQR.innerHTML = "";
 
 
+        /*
+        --------------------------------------------------------
+        VERIFICAR SE QR CODE EXISTE
+        --------------------------------------------------------
+        */
+
         if (!codigoQR) {
 
             elementoQR.innerHTML =
-                "<span style='color:#222'>" +
+                "<span style='color:#222;font-weight:bold'>" +
                 "QR Code indisponível." +
                 "</span>";
 
@@ -586,41 +566,87 @@ async function consultarIngresso() {
         }
 
 
-        new QRCode(
+        /*
+        --------------------------------------------------------
+        VERIFICAR BIBLIOTECA
+        --------------------------------------------------------
+        */
 
-            elementoQR,
+        if (
+            typeof QRCode ===
+            "undefined"
+        ) {
 
-            {
+            elementoQR.innerHTML =
+                "<span style='color:#222;font-weight:bold'>" +
+                "Erro ao carregar o gerador do QR Code." +
+                "</span>";
 
-                text:
-                    String(
-                        codigoQR
-                    ),
+            console.error(
+                "QRCode.js não carregou."
+            );
 
-                width:
-                    220,
-
-                height:
-                    220,
-
-                correctLevel:
-                    QRCode.CorrectLevel.H
-
-            }
-
-        );
+            return;
+        }
 
 
-        console.log(
-            "QR CODE GERADO:",
-            codigoQR
-        );
+        /*
+        --------------------------------------------------------
+        GERAR QR CODE
+        --------------------------------------------------------
+        */
 
+        try {
+
+            new QRCode(
+
+                elementoQR,
+
+                {
+
+                    text:
+                        String(
+                            codigoQR
+                        ),
+
+                    width:
+                        220,
+
+                    height:
+                        220,
+
+                    correctLevel:
+                        QRCode.CorrectLevel.H
+
+                }
+
+            );
+
+
+            console.log(
+                "QR CODE GERADO COM SUCESSO:",
+                codigoQR
+            );
+
+
+        } catch (erroQR) {
+
+            console.error(
+                "ERRO AO GERAR QR CODE:",
+                erroQR
+            );
+
+            elementoQR.innerHTML =
+                "<span style='color:#222;font-weight:bold'>" +
+                "Não foi possível gerar o QR Code." +
+                "</span>";
+
+        }
 
     } catch (erro) {
 
         console.error(
-            "ERRO:",
+            "ERRO AO CONSULTAR INGRESSO:",
             erro
         );
 
@@ -635,6 +661,7 @@ async function consultarIngresso() {
             .getElementById("statusErro")
             .classList
             .remove("hidden");
+
     }
 
 }
