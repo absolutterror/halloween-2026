@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -205,8 +206,6 @@
                 required
             >
 
-                      
-
             <button
                 type="submit"
                 class="submit-button"
@@ -233,8 +232,8 @@
 // CONFIGURAÇÃO
 // ==========================================================
 
-// AGORA O SITE FALA COM O CLOUDFLARE WORKER
-// E NÃO DIRETAMENTE COM O GOOGLE APPS SCRIPT.
+// Site fala com o Cloudflare Worker
+// e não diretamente com o Google Apps Script.
 
 const URL_API =
     "https://halloween-2026-webhook.henriquereboucas13.workers.dev";
@@ -350,10 +349,19 @@ formulario.addEventListener(
                 "whatsapp"
             ).value.trim();
 
-        const cpf =
-            document.getElementById(
-                "cpf"
-            ).value.trim();
+
+        // ==================================================
+        // CONFERE CAMPOS
+        // ==================================================
+
+        if (!nome || !whatsapp) {
+
+            alert(
+                "Preencha seu nome e WhatsApp."
+            );
+
+            return;
+        }
 
 
         // ==================================================
@@ -390,13 +398,17 @@ formulario.addEventListener(
 
             whatsapp: whatsapp,
 
-            cpfCnpj: cpf,
-
             tipo: tipo,
 
             valor: valor
 
         };
+
+
+        console.log(
+            "Dados enviados:",
+            dados
+        );
 
 
         try {
@@ -530,74 +542,9 @@ formulario.addEventListener(
     }
 );
 
-
-// ==========================================================
-// FORMATAÇÃO DO CPF
-// ==========================================================
-
-document
-    .getElementById("cpf")
-    .addEventListener(
-        "input",
-        function() {
-
-            let valorCpf =
-                this.value
-                    .replace(/\D/g, "");
-
-            valorCpf =
-                valorCpf.substring(
-                    0,
-                    11
-                );
-
-
-            if (
-                valorCpf.length > 9
-            ) {
-
-                valorCpf =
-                    valorCpf.replace(
-                        /(\d{3})(\d{3})(\d{3})(\d{2})/,
-                        "$1.$2.$3-$4"
-                    );
-
-            }
-
-            else if (
-                valorCpf.length > 6
-            ) {
-
-                valorCpf =
-                    valorCpf.replace(
-                        /(\d{3})(\d{3})(\d+)/,
-                        "$1.$2.$3"
-                    );
-
-            }
-
-            else if (
-                valorCpf.length > 3
-            ) {
-
-                valorCpf =
-                    valorCpf.replace(
-                        /(\d{3})(\d+)/,
-                        "$1.$2"
-                    );
-
-            }
-
-
-            this.value =
-                valorCpf;
-
-        }
-    );
-
 </script>
 
 </body>
 
 </html>
-
+```
