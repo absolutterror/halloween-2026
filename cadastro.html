@@ -1,184 +1,251 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>Cadastro - Halloween 2026</title>
 
   <style>
+
     * {
       box-sizing: border-box;
     }
 
     body {
+
       margin: 0;
+
       min-height: 100vh;
-      font-family: Arial, Helvetica, sans-serif;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
       background:
-        radial-gradient(circle at top, #3a0000 0%, #120000 35%, #050505 75%);
+        radial-gradient(
+          circle at top,
+          #3a0000 0%,
+          #120000 35%,
+          #050505 75%
+        );
+
       color: #fff;
+
       display: flex;
+
       justify-content: center;
+
       align-items: center;
+
       padding: 20px;
     }
 
     .container {
+
       width: 100%;
+
       max-width: 500px;
-      background: rgba(10, 10, 10, 0.95);
-      border: 2px solid #ff5a00;
+
+      background:
+        rgba(10, 10, 10, 0.95);
+
+      border:
+        2px solid #ff5a00;
+
       border-radius: 18px;
+
       padding: 30px 25px;
-      box-shadow: 0 0 30px rgba(255, 80, 0, 0.35);
+
+      box-shadow:
+        0 0 30px
+        rgba(255, 80, 0, 0.35);
     }
 
     h1 {
+
       text-align: center;
+
       color: #ff5a00;
+
       margin-top: 0;
+
       margin-bottom: 8px;
+
       font-size: 32px;
+
       letter-spacing: 2px;
     }
 
     .subtitulo {
+
       text-align: center;
+
       color: #ccc;
+
       margin-bottom: 30px;
+
       font-size: 14px;
     }
 
     label {
+
       display: block;
+
       margin-top: 18px;
+
       margin-bottom: 7px;
+
       font-weight: bold;
+
       color: #fff;
     }
 
     input {
+
       width: 100%;
+
       padding: 14px;
+
       border-radius: 8px;
-      border: 1px solid #555;
+
+      border:
+        1px solid #555;
+
       background: #171717;
+
       color: #fff;
+
       font-size: 16px;
+
       outline: none;
     }
 
     input:focus {
+
       border-color: #ff5a00;
-      box-shadow: 0 0 8px rgba(255, 90, 0, 0.35);
+
+      box-shadow:
+        0 0 8px
+        rgba(255, 90, 0, 0.35);
     }
 
-    .ingressos {
-      display: flex;
-      gap: 12px;
-      margin-top: 10px;
-    }
+    button {
 
-    .ingresso {
-      flex: 1;
-      padding: 18px 10px;
-      border: 2px solid #555;
-      background: #151515;
-      color: white;
-      border-radius: 10px;
-      cursor: pointer;
-      text-align: center;
-      transition: 0.2s;
-    }
-
-    .ingresso:hover {
-      border-color: #ff5a00;
-    }
-
-    .ingresso.selecionado {
-      border-color: #ff5a00;
-      background: #2a0d00;
-      box-shadow: 0 0 15px rgba(255, 90, 0, 0.3);
-    }
-
-    .ingresso strong {
-      display: block;
-      font-size: 18px;
-      margin-bottom: 5px;
-    }
-
-    .preco {
-      color: #ff7b32;
-      font-weight: bold;
-      font-size: 20px;
-    }
-
-    button#continuar {
       width: 100%;
+
       margin-top: 28px;
+
       padding: 16px;
+
       border: none;
+
       border-radius: 10px;
+
       background: #ff5a00;
+
       color: #fff;
+
       font-size: 18px;
+
       font-weight: bold;
+
       cursor: pointer;
+
       transition: 0.2s;
     }
 
-    button#continuar:hover {
+    button:hover {
+
       background: #ff7300;
+
       transform: scale(1.01);
     }
 
-    button#continuar:disabled {
+    button:disabled {
+
       background: #555;
+
       cursor: not-allowed;
+
       transform: none;
     }
 
     #mensagem {
+
       margin-top: 18px;
+
       text-align: center;
+
       font-weight: bold;
+
       min-height: 22px;
     }
 
     .erro {
+
       color: #ff4444;
     }
 
     .sucesso {
+
       color: #00ff88;
     }
 
     .carregando {
+
       color: #ffb000;
     }
 
     .aviso {
+
       margin-top: 18px;
+
       font-size: 12px;
+
       color: #999;
+
       text-align: center;
+
       line-height: 1.5;
     }
+
   </style>
+
 </head>
+
 
 <body>
 
+
   <div class="container">
 
-    <h1>HALLOWEEN 2026</h1>
+    <h1>
+      HALLOWEEN 2026
+    </h1>
+
 
     <div class="subtitulo">
-      Preencha seus dados e escolha seu ingresso
+
+      Preencha seus dados
+      para continuar
+
     </div>
 
-    <label for="nome">Nome completo</label>
+
+    <!-- NOME -->
+
+    <label for="nome">
+      Nome completo
+    </label>
+
     <input
       type="text"
       id="nome"
@@ -186,7 +253,13 @@
       autocomplete="name"
     >
 
-    <label for="whatsapp">WhatsApp</label>
+
+    <!-- WHATSAPP -->
+
+    <label for="whatsapp">
+      WhatsApp
+    </label>
+
     <input
       type="tel"
       id="whatsapp"
@@ -195,7 +268,13 @@
       autocomplete="tel"
     >
 
-    <label for="cpf">CPF</label>
+
+    <!-- CPF -->
+
+    <label for="cpf">
+      CPF
+    </label>
+
     <input
       type="text"
       id="cpf"
@@ -204,98 +283,139 @@
       inputmode="numeric"
     >
 
-    <label>Escolha seu ingresso</label>
 
-    <div class="ingressos">
-
-      <div
-        class="ingresso"
-        id="masculino"
-        data-tipo="Masculino"
-        data-valor="30"
-      >
-        <strong>Masculino</strong>
-        <span class="preco">R$ 30,00</span>
-      </div>
-
-      <div
-        class="ingresso"
-        id="feminino"
-        data-tipo="Feminino"
-        data-valor="20"
-      >
-        <strong>Feminino</strong>
-        <span class="preco">R$ 20,00</span>
-      </div>
-
-    </div>
+    <!-- BOTÃO -->
 
     <button id="continuar">
+
       CONTINUAR PARA PAGAMENTO
+
     </button>
+
 
     <div id="mensagem"></div>
 
+
     <div class="aviso">
-      Seus dados serão utilizados para gerar o ingresso e o pagamento.
+
+      Seus dados serão utilizados
+      para gerar o ingresso e o pagamento.
+
     </div>
 
   </div>
 
+
 <script>
 
-  // ============================================================
-  // CONFIGURAÇÃO
-  // ============================================================
 
-  const URL_API =
-    "https://halloween-2026-webhook.henriquereboucas13.workers.dev";
+// ============================================================
+// CONFIGURAÇÃO
+// ============================================================
 
-
-  // ============================================================
-  // ELEMENTOS
-  // ============================================================
-
-  const nomeInput =
-    document.getElementById("nome");
-
-  const whatsappInput =
-    document.getElementById("whatsapp");
-
-  const cpfInput =
-    document.getElementById("cpf");
-
-  const masculino =
-    document.getElementById("masculino");
-
-  const feminino =
-    document.getElementById("feminino");
-
-  const continuar =
-    document.getElementById("continuar");
-
-  const mensagem =
-    document.getElementById("mensagem");
+const URL_API =
+  "https://halloween-2026-webhook.henriquereboucas13.workers.dev";
 
 
-  let tipoSelecionado = "";
-  let valorSelecionado = 0;
+// ============================================================
+// PEGAR O TIPO E VALOR DA URL
+// ============================================================
+//
+// Exemplo:
+//
+// cadastro.html?tipo=Masculino&valor=30
+//
+// ou
+//
+// cadastro.html?tipo=Feminino&valor=20
+//
+// ============================================================
+
+const parametros =
+  new URLSearchParams(
+    window.location.search
+  );
 
 
-  // ============================================================
-  // MÁSCARA WHATSAPP
-  // ============================================================
+const tipoSelecionado =
+  parametros.get("tipo");
 
-  whatsappInput.addEventListener("input", function () {
+
+const valorSelecionado =
+  Number(
+    parametros.get("valor")
+  );
+
+
+// ============================================================
+// ELEMENTOS
+// ============================================================
+
+const nomeInput =
+  document.getElementById("nome");
+
+const whatsappInput =
+  document.getElementById("whatsapp");
+
+const cpfInput =
+  document.getElementById("cpf");
+
+const continuar =
+  document.getElementById("continuar");
+
+const mensagem =
+  document.getElementById("mensagem");
+
+
+// ============================================================
+// VERIFICAR SE O TIPO VEIO DA PÁGINA ANTERIOR
+// ============================================================
+
+if (
+  !tipoSelecionado ||
+  !valorSelecionado
+) {
+
+  mensagem.className =
+    "erro";
+
+  mensagem.textContent =
+    "Ingresso não selecionado. Volte para a página anterior.";
+
+  continuar.disabled = true;
+}
+
+
+// ============================================================
+// MÁSCARA WHATSAPP
+// ============================================================
+
+whatsappInput.addEventListener(
+  "input",
+  function () {
 
     let valor =
-      this.value.replace(/\D/g, "");
+      this.value.replace(
+        /\D/g,
+        ""
+      );
 
-    if (valor.length > 11) {
-      valor = valor.substring(0, 11);
+
+    if (
+      valor.length > 11
+    ) {
+
+      valor =
+        valor.substring(
+          0,
+          11
+        );
     }
 
-    if (valor.length <= 10) {
+
+    if (
+      valor.length <= 10
+    ) {
 
       valor =
         valor.replace(
@@ -324,34 +444,54 @@
         );
     }
 
-    this.value = valor;
-  });
+
+    this.value =
+      valor;
+
+  }
+);
 
 
-  // ============================================================
-  // MÁSCARA CPF
-  // ============================================================
+// ============================================================
+// MÁSCARA CPF
+// ============================================================
 
-  cpfInput.addEventListener("input", function () {
+cpfInput.addEventListener(
+  "input",
+  function () {
 
     let valor =
-      this.value.replace(/\D/g, "");
+      this.value.replace(
+        /\D/g,
+        ""
+      );
 
-    if (valor.length > 11) {
-      valor = valor.substring(0, 11);
+
+    if (
+      valor.length > 11
+    ) {
+
+      valor =
+        valor.substring(
+          0,
+          11
+        );
     }
 
-    valor =
-      valor.replace(
-        /(\d{3})(\d)/,
-        "$1.$2"
-      );
 
     valor =
       valor.replace(
         /(\d{3})(\d)/,
         "$1.$2"
       );
+
+
+    valor =
+      valor.replace(
+        /(\d{3})(\d)/,
+        "$1.$2"
+      );
+
 
     valor =
       valor.replace(
@@ -359,154 +499,210 @@
         "$1-$2"
       );
 
-    this.value = valor;
-  });
+
+    this.value =
+      valor;
+
+  }
+);
 
 
-  // ============================================================
-  // ESCOLHA DO INGRESSO
-  // ============================================================
+// ============================================================
+// VALIDAR CPF
+// ============================================================
 
-  masculino.addEventListener("click", function () {
+function validarCPF(cpf) {
 
-    masculino.classList.add("selecionado");
-    feminino.classList.remove("selecionado");
-
-    tipoSelecionado = "Masculino";
-    valorSelecionado = 30;
-  });
-
-
-  feminino.addEventListener("click", function () {
-
-    feminino.classList.add("selecionado");
-    masculino.classList.remove("selecionado");
-
-    tipoSelecionado = "Feminino";
-    valorSelecionado = 20;
-  });
+  cpf =
+    cpf.replace(
+      /\D/g,
+      ""
+    );
 
 
-  // ============================================================
-  // VALIDAR CPF
-  // ============================================================
+  if (
+    cpf.length !== 11
+  ) {
 
-  function validarCPF(cpf) {
-
-    cpf =
-      cpf.replace(/\D/g, "");
-
-    if (cpf.length !== 11) {
-      return false;
-    }
-
-    // CPF com todos os números iguais
-    if (/^(\d)\1+$/.test(cpf)) {
-      return false;
-    }
-
-    let soma = 0;
-    let resto;
-
-    for (let i = 1; i <= 9; i++) {
-      soma +=
-        parseInt(cpf.substring(i - 1, i)) *
-        (11 - i);
-    }
-
-    resto =
-      (soma * 10) % 11;
-
-    if (resto === 10 || resto === 11) {
-      resto = 0;
-    }
-
-    if (
-      resto !==
-      parseInt(cpf.substring(9, 10))
-    ) {
-      return false;
-    }
-
-    soma = 0;
-
-    for (let i = 1; i <= 10; i++) {
-      soma +=
-        parseInt(cpf.substring(i - 1, i)) *
-        (12 - i);
-    }
-
-    resto =
-      (soma * 10) % 11;
-
-    if (resto === 10 || resto === 11) {
-      resto = 0;
-    }
-
-    if (
-      resto !==
-      parseInt(cpf.substring(10, 11))
-    ) {
-      return false;
-    }
-
-    return true;
+    return false;
   }
 
 
-  // ============================================================
-  // GERAR ID DO INGRESSO
-  // ============================================================
+  if (
+    /^(\d)\1+$/.test(cpf)
+  ) {
 
-  function gerarId() {
-
-    const caracteres =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
-    let codigo = "";
-
-    for (let i = 0; i < 8; i++) {
-
-      codigo +=
-        caracteres.charAt(
-          Math.floor(
-            Math.random() *
-            caracteres.length
-          )
-        );
-    }
-
-    return "HW26-" + codigo;
+    return false;
   }
 
 
-  // ============================================================
-  // CONTINUAR
-  // ============================================================
+  let soma = 0;
 
-  continuar.addEventListener("click", async function () {
+  let resto;
+
+
+  for (
+    let i = 1;
+    i <= 9;
+    i++
+  ) {
+
+    soma +=
+      parseInt(
+        cpf.substring(
+          i - 1,
+          i
+        )
+      ) *
+      (11 - i);
+  }
+
+
+  resto =
+    (soma * 10) % 11;
+
+
+  if (
+    resto === 10 ||
+    resto === 11
+  ) {
+
+    resto = 0;
+  }
+
+
+  if (
+    resto !==
+    parseInt(
+      cpf.substring(
+        9,
+        10
+      )
+    )
+  ) {
+
+    return false;
+  }
+
+
+  soma = 0;
+
+
+  for (
+    let i = 1;
+    i <= 10;
+    i++
+  ) {
+
+    soma +=
+      parseInt(
+        cpf.substring(
+          i - 1,
+          i
+        )
+      ) *
+      (12 - i);
+  }
+
+
+  resto =
+    (soma * 10) % 11;
+
+
+  if (
+    resto === 10 ||
+    resto === 11
+  ) {
+
+    resto = 0;
+  }
+
+
+  if (
+    resto !==
+    parseInt(
+      cpf.substring(
+        10,
+        11
+      )
+    )
+  ) {
+
+    return false;
+  }
+
+
+  return true;
+}
+
+
+// ============================================================
+// GERAR ID
+// ============================================================
+
+function gerarId() {
+
+  const caracteres =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+
+  let codigo = "";
+
+
+  for (
+    let i = 0;
+    i < 8;
+    i++
+  ) {
+
+    codigo +=
+      caracteres.charAt(
+        Math.floor(
+          Math.random() *
+          caracteres.length
+        )
+      );
+  }
+
+
+  return "HW26-" + codigo;
+}
+
+
+// ============================================================
+// CONTINUAR
+// ============================================================
+
+continuar.addEventListener(
+  "click",
+  async function () {
 
     mensagem.className = "";
+
     mensagem.textContent = "";
 
 
     const nome =
       nomeInput.value.trim();
 
+
     const whatsapp =
       whatsappInput.value.trim();
+
 
     const cpf =
       cpfInput.value.trim();
 
 
-    // ----------------------------------------------------------
+    // --------------------------------------------------------
     // VALIDAÇÕES
-    // ----------------------------------------------------------
+    // --------------------------------------------------------
 
     if (!nome) {
 
-      mensagem.className = "erro";
+      mensagem.className =
+        "erro";
+
       mensagem.textContent =
         "Digite seu nome.";
 
@@ -517,10 +713,15 @@
 
 
     if (
-      whatsapp.replace(/\D/g, "").length < 10
+      whatsapp.replace(
+        /\D/g,
+        ""
+      ).length < 10
     ) {
 
-      mensagem.className = "erro";
+      mensagem.className =
+        "erro";
+
       mensagem.textContent =
         "Digite um WhatsApp válido.";
 
@@ -530,9 +731,13 @@
     }
 
 
-    if (!validarCPF(cpf)) {
+    if (
+      !validarCPF(cpf)
+    ) {
 
-      mensagem.className = "erro";
+      mensagem.className =
+        "erro";
+
       mensagem.textContent =
         "Digite um CPF válido.";
 
@@ -542,24 +747,16 @@
     }
 
 
-    if (!tipoSelecionado) {
+    // --------------------------------------------------------
+    // DESABILITAR
+    // --------------------------------------------------------
 
-      mensagem.className = "erro";
-      mensagem.textContent =
-        "Escolha seu ingresso.";
-
-      return;
-    }
-
-
-    // ----------------------------------------------------------
-    // DESABILITAR BOTÃO
-    // ----------------------------------------------------------
-
-    continuar.disabled = true;
+    continuar.disabled =
+      true;
 
     continuar.textContent =
       "GERANDO PAGAMENTO...";
+
 
     mensagem.className =
       "carregando";
@@ -570,29 +767,38 @@
 
     try {
 
-      // --------------------------------------------------------
+
+      // ------------------------------------------------------
       // GERAR ID
-      // --------------------------------------------------------
+      // ------------------------------------------------------
 
       const id =
         gerarId();
 
 
-      // --------------------------------------------------------
-      // DADOS ENVIADOS AO WORKER
-      // --------------------------------------------------------
+      // ------------------------------------------------------
+      // DADOS
+      // ------------------------------------------------------
 
       const dados = {
 
-        id: id,
+        id:
+          id,
 
-        nome: nome,
+        nome:
+          nome,
 
         whatsapp:
-          whatsapp.replace(/\D/g, ""),
+          whatsapp.replace(
+            /\D/g,
+            ""
+          ),
 
         cpfCnpj:
-          cpf.replace(/\D/g, ""),
+          cpf.replace(
+            /\D/g,
+            ""
+          ),
 
         tipo:
           tipoSelecionado,
@@ -608,23 +814,28 @@
       );
 
 
-      // --------------------------------------------------------
-      // ENVIAR PARA CLOUDFLARE WORKER
-      // --------------------------------------------------------
+      // ------------------------------------------------------
+      // ENVIAR PARA WORKER
+      // ------------------------------------------------------
 
       const resposta =
         await fetch(
           URL_API,
           {
-            method: "POST",
+
+            method:
+              "POST",
 
             headers: {
+
               "Content-Type":
                 "text/plain;charset=utf-8"
             },
 
             body:
-              JSON.stringify(dados)
+              JSON.stringify(
+                dados
+              )
           }
         );
 
@@ -634,36 +845,40 @@
 
 
       console.log(
-        "Resposta do servidor:",
+        "Resposta:",
         texto
       );
 
 
       let resultado;
 
+
       try {
 
         resultado =
-          JSON.parse(texto);
+          JSON.parse(
+            texto
+          );
 
-      } catch (erroJSON) {
+      } catch (erro) {
 
         throw new Error(
-          "O servidor retornou uma resposta inválida: " +
+          "Resposta inválida do servidor: " +
           texto
         );
       }
 
 
-      // --------------------------------------------------------
-      // VERIFICAR RESPOSTA
-      // --------------------------------------------------------
+      // ------------------------------------------------------
+      // VERIFICAR
+      // ------------------------------------------------------
 
       if (
         !resultado.sucesso
       ) {
 
         throw new Error(
+
           resultado.mensagem ||
           resultado.erro ||
           "Não foi possível criar o ingresso."
@@ -681,9 +896,9 @@
       }
 
 
-      // --------------------------------------------------------
+      // ------------------------------------------------------
       // SUCESSO
-      // --------------------------------------------------------
+      // ------------------------------------------------------
 
       mensagem.className =
         "sucesso";
@@ -692,17 +907,22 @@
         "Ingresso criado! Redirecionando...";
 
 
-      // --------------------------------------------------------
+      // ------------------------------------------------------
       // IR PARA PAGAMENTO
-      // --------------------------------------------------------
+      // ------------------------------------------------------
 
       window.location.href =
         "pagamento.html?tipo=" +
-        encodeURIComponent(tipoSelecionado) +
+        encodeURIComponent(
+          tipoSelecionado
+        ) +
         "&id=" +
-        encodeURIComponent(id);
+        encodeURIComponent(
+          id
+        );
 
     }
+
 
     catch (erro) {
 
@@ -711,23 +931,29 @@
         erro
       );
 
+
       mensagem.className =
         "erro";
+
 
       mensagem.textContent =
         erro.message ||
         "Ocorreu um erro ao criar seu ingresso.";
 
+
       continuar.disabled =
         false;
+
 
       continuar.textContent =
         "CONTINUAR PARA PAGAMENTO";
     }
 
-  });
+  }
+);
 
 </script>
 
 </body>
+
 </html>
