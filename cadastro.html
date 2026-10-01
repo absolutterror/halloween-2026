@@ -911,15 +911,15 @@ continuar.addEventListener(
       // IR PARA PAGAMENTO
       // ------------------------------------------------------
 
-      window.location.href =
-        "pagamento.html?tipo=" +
-        encodeURIComponent(
-          tipoSelecionado
-        ) +
-        "&id=" +
-        encodeURIComponent(
-          id
-        );
+     window.location.href =
+  "pagamento.html?tipo=" +
+  encodeURIComponent(
+    tipoSelecionado.toLowerCase()
+  ) +
+  "&id=" +
+  encodeURIComponent(
+    id
+  );
 
     }
 
